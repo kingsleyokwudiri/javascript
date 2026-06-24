@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <style>
+      button {
+        padding: 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: gray;
+        transition: 0.5s;
+      }
+    </style>
+    <script src="rockpaperscissors.js"></script>
+    <h1>Rock Paper Scissors</h1>
+    <script>
+      let randomNumber1;
+      let computerMove;
+      let result;
+    </script>
+    <button
+      onclick="
+        randomNumber1 = Math.random();
+
+        computerMove = '';
+        if (randomNumber1 >= 0 && randomNumber1 < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber1 >= 1 / 3 && randomNumber1 < 2 / 3) {
+          computerMove = 'paper';
+        } else if (randomNumber1 >= 2 / 3 && randomNumber1 < 1) {
+          computerMove = 'scissors';
+        }
+
+        result = '';
+        if (computerMove === 'rock') {
+          result = 'It\'s a tie!';
+        } else if (computerMove === 'paper') {
+          result = 'You lose!';
+        } else if (computerMove === 'scissors') {
+          result = 'You win!';
+        }
+        alert(`You picked rock. Computer picked ${computerMove}. ${result}`);
+      "
+    >
+      Rock
+    </button>
+
+    <button
+      onclick="
+        randomNumber1 = Math.random();
+
+        computerMove = '';
+        if (randomNumber1 >= 0 && randomNumber1 < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber1 >= 1 / 3 && randomNumber1 < 2 / 3) {
+          computerMove = 'paper';
+        } else if (randomNumber1 >= 2 / 3 && randomNumber1 < 1) {
+          computerMove = 'scissors';
+        }
+
+        result = '';
+        if (computerMove === 'rock') {
+          result = 'You win!';
+        } else if (computerMove === 'paper') {
+          result = 'It\'s a tie!';
+        } else if (computerMove === 'scissors') {
+          result = 'You lose!';
+        }
+        alert(`You picked paper. Computer picked ${computerMove}. ${result}`);
+      "
+    >
+      Paper
+    </button>
+
+    <button
+      onclick="
+        randomNumber1 = Math.random();
+
+        computerMove = '';
+        if (randomNumber1 >= 0 && randomNumber1 < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber1 >= 1 / 3 && randomNumber1 < 2 / 3) {
+          computerMove = 'paper';
+        } else if (randomNumber1 >= 2 / 3 && randomNumber1 < 1) {
+          computerMove = 'scissors';
+        }
+
+        result = '';
+        if (computerMove === 'rock') {
+          result = 'You lose!';
+        } else if (computerMove === 'paper') {
+          result = 'You win!';
+        } else if (computerMove === 'scissors') {
+          result = 'It\'s a tie!';
+        }
+        alert(
+          `You picked scissors. Computer picked ${computerMove}. ${result}`,
+        );
+      "
+    >
+      Scissors
+    </button>
+  </body>
+</html>
