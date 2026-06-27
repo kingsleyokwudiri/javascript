@@ -56,6 +56,26 @@ function convertLength(length, from, to) {
   } else if (from === 'km') {
     const convertedLength = Math.round(length / 1.6);
     console.log(`The new length is ${convertedLength} miles.`)
+  } else if (from === 'miles' && to === 'kilometer') {
+    const convertedLength = Math.round(length * 1.6);
+    console.log(`The new length is ${convertedLength}km.`)
+  } else if (from === 'miles' && to === 'km') {
+    const convertedLength = Math.round(length * 1.6);
+    console.log(`The new length is ${convertedLength}km.`)
+  } else if (from === 'km' && to === 'miles') {
+    const convertedLength = Math.round(length / 1.6);
+    console.log(`The new length is ${convertedLength} miles.`)
+  } else if (from === 'kilometer' && to === 'miles') {
+    const convertedLength = Math.round(length / 1.6);
+    console.log(`The new length is ${convertedLength} miles.`)
+  } else if (from === 'miles' && to === 'miles') {
+    console.log(`The length is ${length} miles.`)
+  } else if (from === 'km' && to === 'km') {
+    console.log(`The length is ${length}km. .`)
+  } else if (from === 'kilometer' && to === 'kilometer') {
+    console.log(`The length is ${length}km. .`)
+  } else {
+    console.log('Invalid unit.')
   }
 }
-convertLength(55, 'km')
+convertLength(55, 'kilometer', 'miles');
