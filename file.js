@@ -24,14 +24,14 @@ function greet(name) {
 function convertToFahrenheit(celsius) {
   console.log(celsius * 9 / 5 + 32 );
 }
-convertToFahrenheit(25);
 
 function convertToCelsius(fahrenheit) {
   console.log((fahrenheit - 32) * 5 / 9);
 }
-convertToCelsius(86);
 
 function convertTemperature(degrees, unit, message = 'The temperature is: ') {
+  convertToFahrenheit();
+  convertToCelsius();
   if (unit === 'C') {
     const roundedFahrenheit = Math.round(degrees * 9 / 5 + 32);
     console.log(`${message}${roundedFahrenheit}°F`);
@@ -45,3 +45,17 @@ function convertTemperature(degrees, unit, message = 'The temperature is: ') {
 }
 convertTemperature(25, 'C');
 convertTemperature(86, 'F');
+
+function convertLength(length, from, to) {
+  if (from === 'miles') {
+    const convertedLength = Math.round(length * 1.6);
+    console.log(`The new length is ${convertedLength}km.`)
+  } else if (from === 'kilometer') {
+    const convertedLength = Math.round(length / 1.6);
+    console.log(`The new length is ${convertedLength} miles.`)
+  } else if (from === 'km') {
+    const convertedLength = Math.round(length / 1.6);
+    console.log(`The new length is ${convertedLength} miles.`)
+  }
+}
+convertLength(55, 'km')
