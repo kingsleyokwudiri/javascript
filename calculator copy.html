@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calculator</title>
+  </head>
+  <script>
+    function updateCalculation() {}
+    let calculation = 0;
+  </script>
+  <body>
+    <h1>Calculator</h1>
+    <p>
+      <button
+        onclick="
+          calculation = calculation + 1;
+          console.log(calculation);
+        "
+      >
+        1
+      </button>
+      <button
+        onclick="
+          calculation = calculation + 2;
+          console.log(calculation);
+        "
+      >
+        2
+      </button>
+      <button
+        onclick="
+          calculation = calculation + 3;
+          console.log(calculation);
+        "
+      >
+        3
+      </button>
+    </p>
+    <p></p>
+    <button
+      onclick="
+        calculation = calculation + 4;
+        console.log(calculation);
+      "
+    >
+      4
+    </button>
+    <button
+      onclick="
+        calculation = calculation + 5;
+        console.log(calculation);
+      "
+    >
+      5
+    </button>
+    <button
+      onclick="
+        calculation = calculation + 6;
+        console.log(calculation);
+      "
+    >
+      6
+    </button>
+    <p></p>
+
+    <p>
+      <button
+        onclick="
+          calculation = calculation + 7;
+          console.log(calculation);
+        "
+      >
+        7
+      </button>
+      <button
+        onclick="
+          calculation = calculation + 8;
+          console.log(calculation);
+        "
+      >
+        8
+      </button>
+      <button
+        onclick="
+          calculation = calculation + 9;
+          console.log(calculation);
+        "
+      >
+        9
+      </button>
+    </p>
+    <button
+      onclick="
+        calculation = calculation * 10;
+        console.log(calculation);
+      "
+    >
+      0
+    </button>
+    <button onclick="console.log((calculation = eval(calculation)))">=</button>
+    <button onclick="console.log((calculation = eval(calculation)))">-</button>
+    <button onclick="console.log((calculation = eval(calculation)))">+</button>
+    <p>
+      <button
+        onclick="
+          calculation = 0;
+          console.log(0);
+        "
+      >
+        Reset
+      </button>
+    </p>
+  </body>
+</html>
