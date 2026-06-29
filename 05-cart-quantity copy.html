@@ -9,11 +9,12 @@
     <script>
       let cartQuantity = 0;
       function updateCartQuantity(amount) {
-        if (cartQuantity + amount > 10) {
-          alert("The cart is full.");
-        } else {
+        if (!(cartQuantity + amount >= 10)) {
           cartQuantity = cartQuantity + amount;
           console.log(`Cart quantity: ${cartQuantity}`);
+        } else {
+          alert("The cart is full.");
+          return "Denied.";
         }
       }
     </script>
