@@ -4,14 +4,38 @@
     <title>Calculator</title>
   </head>
   <script>
-    function updateCalculation() {}
+    function pressAction(action) {
+      firstNumber = parseFloat(currentInput);
+      activeAction = action;
+      currentInput = "";
+      console.log("Action chosen: " + action);
+    }
+    function pressNumber(num) {
+      currentInput += num.toString();
+      console.log(currentInput);
+    }
+    function pressEquals() {
+      let secondNumber = parseFloat(currentInput);
+      let result = 0;
+      if (activeAction === "+") {
+        result = firstNumber + secondNumber;
+      } else if (activeAction === "-") {
+        result = firstNumber - secondNumber;
+      }
+      console.log("Answer: " + result);
+      currentInput = result.toString();
+    }
     let calculation = 0;
+    let currentInput = "";
+    let firstNumber = 0;
+    let activeAction = "";
   </script>
   <body>
     <h1>Calculator</h1>
     <p>
       <button
         onclick="
+          pressNumber(1);
           calculation = calculation + 1;
           console.log(calculation);
         "
@@ -20,6 +44,7 @@
       </button>
       <button
         onclick="
+          pressNumber(2);
           calculation = calculation + 2;
           console.log(calculation);
         "
@@ -28,6 +53,7 @@
       </button>
       <button
         onclick="
+          pressNumber(3);
           calculation = calculation + 3;
           console.log(calculation);
         "
@@ -38,6 +64,7 @@
     <p></p>
     <button
       onclick="
+        pressNumber(4);
         calculation = calculation + 4;
         console.log(calculation);
       "
@@ -46,6 +73,7 @@
     </button>
     <button
       onclick="
+        pressNumber(5);
         calculation = calculation + 5;
         console.log(calculation);
       "
@@ -54,6 +82,7 @@
     </button>
     <button
       onclick="
+        pressNumber(6);
         calculation = calculation + 6;
         console.log(calculation);
       "
@@ -65,6 +94,7 @@
     <p>
       <button
         onclick="
+          pressNumber(7);
           calculation = calculation + 7;
           console.log(calculation);
         "
@@ -73,6 +103,7 @@
       </button>
       <button
         onclick="
+          pressNumber(8);
           calculation = calculation + 8;
           console.log(calculation);
         "
@@ -81,6 +112,7 @@
       </button>
       <button
         onclick="
+          pressNumber(9);
           calculation = calculation + 9;
           console.log(calculation);
         "
@@ -90,15 +122,30 @@
     </p>
     <button
       onclick="
+        pressNumber(0);
         calculation = calculation * 10;
         console.log(calculation);
       "
     >
       0
     </button>
-    <button onclick="console.log((calculation = eval(calculation)))">=</button>
+    <button
+      onclick="
+        pressEquals();
+        console.log((calculation = eval(calculation)));
+      "
+    >
+      =
+    </button>
     <button onclick="console.log((calculation = eval(calculation)))">-</button>
-    <button onclick="console.log((calculation = eval(calculation)))">+</button>
+    <button
+      onclick="
+        pressAction('+');
+        console.log((calculation = eval(calculation)));
+      "
+    >
+      +
+    </button>
     <p>
       <button
         onclick="
