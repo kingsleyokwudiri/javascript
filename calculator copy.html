@@ -21,6 +21,10 @@
         result = firstNumber + secondNumber;
       } else if (activeAction === "-") {
         result = firstNumber - secondNumber;
+      } else if (activeAction === "*") {
+        result = firstNumber * secondNumber;
+      } else if (activeAction === "/") {
+        result = firstNumber / secondNumber;
       }
       console.log("Answer: " + result);
       currentInput = result.toString();
@@ -31,36 +35,58 @@
     let activeAction = "";
   </script>
   <body>
-    <h1>Calculator</h1>
-    <p>
-      <button onclick="pressNumber(1)">1</button>
-      <button onclick="pressNumber(2)">2</button>
-      <button onclick="pressNumber(3)">3</button>
-    </p>
-    <p></p>
-    <button onclick="pressNumber(4)">4</button>
-    <button onclick="pressNumber(5)">5</button>
-    <button onclick="pressNumber(6)">6</button>
-    <p></p>
+    <style>
+      .heading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .buttons {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+    <h1 class="heading">Calculator</h1>
+    <div class="buttons">
+      <p>
+        <button onclick="pressNumber(1)">1</button>
+        <button onclick="pressNumber(2)">2</button>
+        <button onclick="pressNumber(3)">3</button>
+      </p>
+      <p>
+        <button onclick="pressNumber(4)">4</button>
+        <button onclick="pressNumber(5)">5</button>
+        <button onclick="pressNumber(6)">6</button>
+      </p>
 
-    <p>
-      <button onclick="pressNumber(7)">7</button>
-      <button onclick="pressNumber(8)">8</button>
-      <button onclick="pressNumber(9)">9</button>
-    </p>
-    <button onclick="pressNumber(0)">0</button>
-    <button onclick="pressEquals()">=</button>
-    <button onclick="pressAction('-')">-</button>
-    <button onclick="pressAction('+')">+</button>
-    <p>
-      <button
-        onclick="
-          currentInput = 0;
-          console.log(currentInput);
-        "
-      >
-        Reset
-      </button>
-    </p>
+      <p>
+        <button onclick="pressNumber(7)">7</button>
+        <button onclick="pressNumber(8)">8</button>
+        <button onclick="pressNumber(9)">9</button>
+      </p>
+      <p>
+        <button onclick="pressNumber(0)">0</button>
+      </p>
+      <p>
+        <button onclick="pressAction('+')">+</button>
+        <button onclick="pressAction('-')">-</button>
+        <button onclick="pressAction('*')">*</button>
+        <button onclick="pressAction('/')">/</button>
+      </p>
+      <p>
+        <button onclick="pressEquals()">=</button>
+      </p>
+      <p>
+        <button
+          onclick="
+            currentInput = 0;
+            console.log(currentInput);
+          "
+        >
+          Reset
+        </button>
+      </p>
+    </div>
   </body>
 </html>
