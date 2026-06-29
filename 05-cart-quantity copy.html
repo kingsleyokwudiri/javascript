@@ -8,44 +8,19 @@
     </button>
     <script>
       let cartQuantity = 0;
+      function updateCartQuantity(amount) {
+        if (cartQuantity + amount > 10) {
+          alert("The cart is full.");
+        } else {
+          cartQuantity = cartQuantity + amount;
+          console.log(`Cart quantity: ${cartQuantity}`);
+        }
+      }
     </script>
 
-    <button
-      onclick="
-        if (cartQuantity + 1 > 10) {
-          alert('The cart is full');
-        } else {
-          cartQuantity = cartQuantity + 1;
-          console.log(`Cart quantity: ${cartQuantity}`);
-        }
-      "
-    >
-      Add to Cart
-    </button>
-    <button
-      onclick="
-        if (cartQuantity + 2 > 10) {
-          alert('The cart is full');
-        } else {
-          cartQuantity = cartQuantity + 2;
-          console.log(`Cart quantity: ${cartQuantity}`);
-        }
-      "
-    >
-      +2
-    </button>
-    <button
-      onclick="
-        if (cartQuantity + 3 > 10) {
-          alert('The cart is full');
-        } else {
-          cartQuantity = cartQuantity + 3;
-          console.log(`Cart quantity: ${cartQuantity}`);
-        }
-      "
-    >
-      +3
-    </button>
+    <button onclick="updateCartQuantity(1)">Add to Cart</button>
+    <button onclick="updateCartQuantity(2)">+2</button>
+    <button onclick="updateCartQuantity(3)">+3</button>
     <button
       onclick="
         cartQuantity = 0;
