@@ -33,119 +33,25 @@
   <body>
     <h1>Calculator</h1>
     <p>
-      <button
-        onclick="
-          pressNumber(1);
-          calculation = calculation + 1;
-          console.log(calculation);
-        "
-      >
-        1
-      </button>
-      <button
-        onclick="
-          pressNumber(2);
-          calculation = calculation + 2;
-          console.log(calculation);
-        "
-      >
-        2
-      </button>
-      <button
-        onclick="
-          pressNumber(3);
-          calculation = calculation + 3;
-          console.log(calculation);
-        "
-      >
-        3
-      </button>
+      <button onclick="pressNumber(1)">1</button>
+      <button onclick="pressNumber(2)">2</button>
+      <button onclick="pressNumber(3)">3</button>
     </p>
     <p></p>
-    <button
-      onclick="
-        pressNumber(4);
-        calculation = calculation + 4;
-        console.log(calculation);
-      "
-    >
-      4
-    </button>
-    <button
-      onclick="
-        pressNumber(5);
-        calculation = calculation + 5;
-        console.log(calculation);
-      "
-    >
-      5
-    </button>
-    <button
-      onclick="
-        pressNumber(6);
-        calculation = calculation + 6;
-        console.log(calculation);
-      "
-    >
-      6
-    </button>
+    <button onclick="pressNumber(4)">4</button>
+    <button onclick="pressNumber(5)">5</button>
+    <button onclick="pressNumber(6)">6</button>
     <p></p>
 
     <p>
-      <button
-        onclick="
-          pressNumber(7);
-          calculation = calculation + 7;
-          console.log(calculation);
-        "
-      >
-        7
-      </button>
-      <button
-        onclick="
-          pressNumber(8);
-          calculation = calculation + 8;
-          console.log(calculation);
-        "
-      >
-        8
-      </button>
-      <button
-        onclick="
-          pressNumber(9);
-          calculation = calculation + 9;
-          console.log(calculation);
-        "
-      >
-        9
-      </button>
+      <button onclick="pressNumber(7)">7</button>
+      <button onclick="pressNumber(8)">8</button>
+      <button onclick="pressNumber(9)">9</button>
     </p>
-    <button
-      onclick="
-        pressNumber(0);
-        calculation = calculation * 10;
-        console.log(calculation);
-      "
-    >
-      0
-    </button>
-    <button
-      onclick="
-        pressEquals();
-        console.log((calculation = eval(calculation)));
-      "
-    >
-      =
-    </button>
-    <button onclick="console.log((calculation = eval(calculation)))">-</button>
-    <button
-      onclick="
-        pressAction('+');
-        console.log((calculation = eval(calculation)));
-      "
-    >
-      +
-    </button>
+    <button onclick="pressNumber(0)">0</button>
+    <button onclick="pressEquals()">=</button>
+    <button onclick="pressAction('-')">-</button>
+    <button onclick="pressAction('+')">+</button>
     <p>
       <button
         onclick="
