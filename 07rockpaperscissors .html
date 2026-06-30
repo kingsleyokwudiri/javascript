@@ -5,21 +5,40 @@
   </head>
   <body>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       button {
         padding: 20px;
         margin: 5px;
         font-size: 16px;
         cursor: pointer;
       }
-      .heading {
+      .button-row {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 1.5rem;
+      }
+      h1 {
         text-align: center;
-        margin-top: 20px;
+        margin: 0 0 1.8rem 0;
+        width: 100%;
       }
       body {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-top: 50px;
+        margin: 0;
+        min-height: 100vh;
+        padding: 1.5rem;
+        flex-direction: column;
+      }
+      .reset {
+        display: flex;
+        justify-content: center;
       }
       button:hover {
         background-color: gray;
@@ -27,11 +46,14 @@
       }
     </style>
     <script src="rockpaperscissors.js"></script>
-    <h1 class="heading">Paper Scissors</h1>
+    <h1>Paper Scissors</h1>
     <script>
       let randomNumber1;
       let computerMove;
       let result;
+      let winCount = 0;
+      let lossCount = 0;
+      let tieCount = 0;
       function pickComputerMove() {
         randomNumber1 = Math.random();
         computerMove = "";
@@ -43,49 +65,62 @@
           computerMove = "scissors";
         }
       }
+
       function playGame(playerMove) {
         pickComputerMove();
         result = "";
         if (playerMove === "rock") {
           if (computerMove === "rock") {
             result = "It's a tie!";
+            tieCount = tieCount + 1;
           } else if (computerMove === "paper") {
             result = "You lose!";
+            lossCount = lossCount + 1;
           } else if (computerMove === "scissors") {
             result = "You win!";
+            winCount = winCount + 1;
           }
           alert(
-            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}`,
+            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}\nWins: ${winCount}, Losses: ${lossCount}, Ties: ${tieCount}`,
           );
         } else if (playerMove === "paper") {
           if (computerMove === "rock") {
             result = "You win!";
+            winCount = winCount + 1;
           } else if (computerMove === "paper") {
             result = "Its a tie!";
+            tieCount = tieCount + 1;
           } else if (computerMove === "scissors") {
             result = "You lose!";
+            lossCount = lossCount + 1;
           }
           alert(
-            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}`,
+            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}\nWins: ${winCount}, Losses: ${lossCount}, Ties: ${tieCount}`,
           );
         } else if (playerMove === "scissors") {
           if (computerMove === "rock") {
             result = "You lose!";
+            lossCount = lossCount + 1;
           } else if (computerMove === "paper") {
             result = "You win!";
+            winCount = winCount + 1;
           } else if (computerMove === "scissors") {
             result = "Its a tie!";
+            tieCount = tieCount + 1;
           }
           alert(
-            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}`,
+            `You picked ${playerMove}. Computer picked ${computerMove}. ${result}\nWins: ${winCount}, Losses: ${lossCount}, Ties: ${tieCount}`,
           );
         }
       }
     </script>
-    <button onclick="playGame('rock')">Rock</button>
-
-    <button onclick="playGame('paper')">Paper</button>
-
-    <button onclick="playGame('scissors')">Scissors</button>
+    <div class="button-row">
+      <button onclick="playGame('rock')">Rock</button>
+      <button onclick="playGame('paper')">Paper</button>
+      <button onclick="playGame('scissors')">Scissors</button>
+    </div>
+    <div class="reset">
+      <button>Reset score</button>
+    </div>
   </body>
 </html>
