@@ -65,7 +65,12 @@
           computerMove = "scissors";
         }
       }
-
+      function reset() {
+        winCount = 0;
+        lossCount = 0;
+        tieCount = 0;
+        alert("Scores were reset!");
+      }
       function playGame(playerMove) {
         pickComputerMove();
         result = "";
@@ -120,7 +125,7 @@
       <button onclick="playGame('scissors')">Scissors</button>
     </div>
     <div class="reset">
-      <button>Reset score</button>
+      <button onclick="reset()">Reset score</button>
     </div>
   </body>
 </html>
