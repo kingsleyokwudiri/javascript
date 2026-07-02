@@ -27,7 +27,9 @@
         result = firstNumber / secondNumber;
       }
       console.log("Answer: " + result);
+      alert("Answer: " + result);
       currentInput = result.toString();
+      currentInput = 0;
     }
     let calculation = 0;
     let currentInput = "";
@@ -81,6 +83,8 @@
         <button
           onclick="
             currentInput = 0;
+            alert('Reset input!');
+            console.log('Reset input!');
             console.log(currentInput);
           "
         >
