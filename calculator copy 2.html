@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calculator</title>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        min-height: 100vh;
+        padding: 1.5rem;
+        flex-direction: column;
+      }
+      .heading {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        margin: 0 0 1.8rem 0;
+        width: 100%;
+      }
+      .buttons {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        gap: 1px;
+        margin-bottom: 1.5rem;
+      }
+      .buttons button {
+        padding: 20px;
+        margin: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .zero {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+    <h1 class="heading">Calculator</h1>
+    <div class="buttons">
+      <p>
+        <button onclick="pressNumber(1)">1</button>
+        <button onclick="pressNumber(2)">2</button>
+        <button onclick="pressNumber(3)">3</button>
+      </p>
+      <p>
+        <button onclick="pressNumber(4)">4</button>
+        <button onclick="pressNumber(5)">5</button>
+        <button onclick="pressNumber(6)">6</button>
+      </p>
+      <p>
+        <button onclick="pressNumber(7)">7</button>
+        <button onclick="pressNumber(8)">8</button>
+        <button onclick="pressNumber(9)">9</button>
+      </p>
+      <p>
+        <button class="zero" onclick="pressNumber(0)">0</button>
+      </p>
+      <p>
+        <button onclick="pressAction('+')">+</button>
+        <button onclick="pressAction('-')">-</button>
+        <button onclick="pressAction('*')">*</button>
+        <button onclick="pressAction('/')">/</button>
+      </p>
+      <p>
+        <button onclick="pressEquals()">=</button>
+      </p>
+      <p>
+        <button onclick="resetCalculator()">Reset</button>
+      </p>
+      <p>
+        <button onclick="showResult()">Show result</button>
+      </p>
+    </div>
+
+    <script>
+      // Variables declared at the top with proper initial values
+      let currentInput = "";
+      let firstNumber = 0;
+      let activeAction = "";
+      let savedResult = null;
+
+      // Load saved result from localStorage
+      const storedData = localStorage.getItem("result");
+      if (storedData) {
+        try {
+          const parsed = JSON.parse(storedData);
+          // Handle both formats: if it's an object with result property, or just a number
+          if (
+            typeof parsed === "object" &&
+            parsed !== null &&
+            "result" in parsed
+          ) {
+            savedResult = parsed.result;
+          } else {
+            savedResult = parsed;
+          }
+        } catch (e) {
+          savedResult = null;
+        }
+      }
+
+      function pressAction(action) {
+        if (currentInput === "") {
+          alert("Please enter a number first");
+          return;
+        }
+        firstNumber = parseFloat(currentInput);
+        activeAction = action;
+        currentInput = "";
+        alert("Action chosen: " + action);
+        console.log(
+          "Action chosen: " + action + " with first number: " + firstNumber,
+        );
+      }
+
+      function pressNumber(num) {
+        currentInput += num.toString();
+        alert("Current input: " + currentInput);
+        console.log("Current input: " + currentInput);
+      }
+
+      function showResult() {
+        if (savedResult !== null && savedResult !== undefined) {
+          alert("Saved result: " + savedResult);
+          console.log("Saved result: " + savedResult);
+        } else {
+          alert("No saved result found");
+          console.log("No saved result found");
+        }
+      }
+
+      function pressEquals() {
+        if (currentInput === "") {
+          alert("Please enter a number first");
+          return;
+        }
+
+        let secondNumber = parseFloat(currentInput);
+        let result = 0;
+
+        if (activeAction === "+") {
+          result = firstNumber + secondNumber;
+        } else if (activeAction === "-") {
+          result = firstNumber - secondNumber;
+        } else if (activeAction === "*") {
+          result = firstNumber * secondNumber;
+        } else if (activeAction === "/") {
+          if (secondNumber === 0) {
+            alert("Error: Division by zero is not allowed.");
+            return;
+          }
+          result = firstNumber / secondNumber;
+        } else {
+          alert("Please select an action first.");
+          return;
+        }
+
+        currentInput = result.toString();
+        savedResult = result;
+
+        // Store consistently as an object with a result property
+        localStorage.setItem("result", JSON.stringify({ result: result }));
+
+        activeAction = "";
+        firstNumber = 0;
+
+        alert("Answer: " + result);
+        console.log("Answer: " + result);
+        console.log("Current input after equals: " + currentInput);
+      }
+
+      function resetCalculator() {
+        currentInput = "";
+        firstNumber = 0;
+        activeAction = "";
+        savedResult = null;
+        localStorage.removeItem("result");
+        alert("Calculator reset.");
+        console.log("Calculator reset.");
+      }
+    </script>
+  </body>
+</html>

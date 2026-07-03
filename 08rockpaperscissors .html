@@ -49,7 +49,12 @@
     <h1>Rock Paper Scissors</h1>
     <script>
       // Initialize score with default values if it doesn't exist in localStorage
-      let score = JSON.parse(localStorage.getItem("score"));
+      let score = JSON.parse(localStorage.getItem("score")) || {
+        wins: 0,
+        losses: 0,
+        ties: 0,
+      };
+      /*
       if (!score) {
         score = {
           wins: 0,
@@ -57,7 +62,9 @@
           ties: 0,
         };
       }
-
+        */
+      // JSON.parse converts the string back to an object
+      console.log();
       function pickComputerMove() {
         const randomNumber = Math.random();
         let computerMove = "";
@@ -119,6 +126,7 @@
         } else if (result === "Tie.") {
           score.ties += 1;
         }
+        // localStorage only supports strings, use JSON.stringify() to convert
         localStorage.setItem("score", JSON.stringify(score));
 
         alert(
