@@ -1,0 +1,22 @@
+0000000000000000000000000000000000000000 90d04622a5e1678faa66725fd73d1c1d61ad88ca Kingsley <kingsleyokwudiri101@gmail.com> 1782330970 +0100	commit (initial): Initial commit
+90d04622a5e1678faa66725fd73d1c1d61ad88ca 4ab7844addc4646160d790f34cca4e1477577621 Kingsley <kingsleyokwudiri101@gmail.com> 1782332071 +0100	commit: used functions in the code
+4ab7844addc4646160d790f34cca4e1477577621 633610f92778fe787518fd19710316d502114782 Kingsley <kingsleyokwudiri101@gmail.com> 1782389752 +0100	commit: added even more functions
+633610f92778fe787518fd19710316d502114782 ada7ef8f708605f01e07fa0bf20724844f1b6846 Kingsley <kingsleyokwudiri101@gmail.com> 1782391247 +0100	commit: created two functions called "convertToFahrenheit" and "convertToCelsius" respectively
+ada7ef8f708605f01e07fa0bf20724844f1b6846 1e9b598634dde749c54ff44068ffd5d9e34cd6cb Kingsley <kingsleyokwudiri101@gmail.com> 1782562060 +0100	commit: created a new function 'convertTemperature' that converts celsius into fahrenheit and vice versa
+1e9b598634dde749c54ff44068ffd5d9e34cd6cb d34718106859911bfbc5b7d0e0e868ea82101922 Kingsley <kingsleyokwudiri101@gmail.com> 1782563189 +0100	commit: created a function called 'convertLength' that converts units in kilometer to miles
+d34718106859911bfbc5b7d0e0e868ea82101922 d9ceabc5e2a1c9ead50da610d043d1c24e857deb Kingsley <kingsleyokwudiri101@gmail.com> 1782564012 +0100	commit: created new values for the parameter 'to' in the function 'convertLength'
+d9ceabc5e2a1c9ead50da610d043d1c24e857deb c8fcc0f0991880e99e4457284fac42f1c353b41f Kingsley <kingsleyokwudiri101@gmail.com> 1782565568 +0100	commit: created a duplicate of the calculator.html file and improved the code..a bit
+c8fcc0f0991880e99e4457284fac42f1c353b41f d682019667334491008c970328d813597d7d2ce0 Kingsley <kingsleyokwudiri101@gmail.com> 1782733209 +0100	commit: improved the code
+d682019667334491008c970328d813597d7d2ce0 4e767e212cc22255d122837d286d139f4c67b113 Kingsley <kingsleyokwudiri101@gmail.com> 1782733615 +0100	commit: improved the code by adding functions
+4e767e212cc22255d122837d286d139f4c67b113 05998702abdac90fa50d9fd8c40a0abd98b477c2 Kingsley <kingsleyokwudiri101@gmail.com> 1782733683 +0100	commit: fixed the reset button
+05998702abdac90fa50d9fd8c40a0abd98b477c2 ca9921f730154825d007864c9bf049436f9857f9 Kingsley <kingsleyokwudiri101@gmail.com> 1782735100 +0100	commit: improved the calculator code by adding styling, and duplicated the cart quantity file
+ca9921f730154825d007864c9bf049436f9857f9 315a8f7338b7089e322e183eb3ef0e27d66dc8e5 Kingsley <kingsleyokwudiri101@gmail.com> 1782744470 +0100	commit: added a function
+315a8f7338b7089e322e183eb3ef0e27d66dc8e5 c5958484b72452f3ea62a697895cc71f87927f23 Kingsley <kingsleyokwudiri101@gmail.com> 1782745974 +0100	commit: improved the code
+c5958484b72452f3ea62a697895cc71f87927f23 c5958484b72452f3ea62a697895cc71f87927f23 Kingsley <kingsleyokwudiri101@gmail.com> 1782816703 +0100	checkout: moving from main to main
+c5958484b72452f3ea62a697895cc71f87927f23 7e517d19a165aeee8940a5144a313206798281ef Kingsley <kingsleyokwudiri101@gmail.com> 1782825550 +0100	commit: added scoring
+7e517d19a165aeee8940a5144a313206798281ef d3d9c01f052cf6efab3e2b8c3907bc6b6015699e Kingsley <kingsleyokwudiri101@gmail.com> 1782825765 +0100	commit: added another function for the reset button
+d3d9c01f052cf6efab3e2b8c3907bc6b6015699e c87fb07504491e5384d6cda5bfd30f1780280adb Kingsley <kingsleyokwudiri101@gmail.com> 1782828390 +0100	commit: replaced the scoring variables with an object in the duplicate rock paper scissors file
+c87fb07504491e5384d6cda5bfd30f1780280adb 5949bc1d545ca3e76d8b08d36b737aa24e272084 Kingsley <kingsleyokwudiri101@gmail.com> 1782984999 +0100	commit: fixed some bugs and added a new button that shows the scores
+5949bc1d545ca3e76d8b08d36b737aa24e272084 c776e74ce1300212c3f522dffafd0654454922ca Kingsley <kingsleyokwudiri101@gmail.com> 1783090896 +0100	commit: added calculator functionality with basic operations and localStorage support
+c776e74ce1300212c3f522dffafd0654454922ca ef47548638a95335206e8eea40f03a305169ba03 Kingsley <kingsleyokwudiri101@gmail.com> 1783091602 +0100	commit: enhanced calculator UI with improved styling, layout adjustments, and button interactions
+ef47548638a95335206e8eea40f03a305169ba03 650407e141d0dbaf64fb74f291b68b2aef61cd10 Kingsley <kingsleyokwudiri101@gmail.com> 1783091910 +0100	commit: refactor calculator layout and enhance display styling for better user experience
