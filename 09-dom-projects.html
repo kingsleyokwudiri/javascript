@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Projects</title>
+  </head>
+  <body>
+    <p>Youtube Subscribe Button</p>
+    <button onclick="subscribe()"class="js-subscribe">Subscribe</button>
+    <br></br>
+    <p>Rock Paper Scissors</p>
+    <a href="/08rockpaperscissors .html">Click here</a>
+    <br></br>
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping</p>
+    <p>Orders over $40 = FREE shipping</p>
+    <input type="number" 
+    onkeydown="calculationkeyDown(event)" class="js-order-amount" placeholder="Cost of order" />
+    <button onclick="calculateTotal()" class="js-calculate-shipping">Calculate</button>
+    <p class="js-shipping-cost"></p>
+    <script>
+      function subscribe() {
+        const buttonElement = document.querySelector('.js-subscribe');
+        if (buttonElement.innerHTML === 'Subscribe') {
+          buttonElement.innerHTML = 'Subscribed';
+        } else {
+          buttonElement.innerHTML = 'Subscribe';
+        }
+      }
+
+      function calculateTotal () {
+        const inputElement = document.querySelector('.js-order-amount');
+        // Number() turns a string into a value
+        let cost = Number(inputElement.value);
+        if (cost < 40) {
+          cost = cost + 10;
+          document.querySelector('.js-shipping-cost').innerHTML = `$${cost}`;
+        } else {
+          document.querySelector('.js-shipping-cost').innerHTML = `$${cost}`;
+        }
+      }
+        function calculationkeyDown (event) {
+          if (event.key === 'Enter') {
+          calculateTotal();
+        }
+      }
+
+
+    </script>
+  </body>
+</html>
