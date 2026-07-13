@@ -21,6 +21,12 @@ function addTodo() {
   const dueDate = dateInputElement.value;
   if (name === "") {
     alert("Please enter a task!");
+    inputElement.focus(); // Set focus back to the input field
+    return;
+  } else if (dueDate === "") {
+    alert("Please enter a date!");
+    dateInputElement.focus(); // Set focus back to the date input field
+    return;
   } else {
     // Fixed: Now pushes an object structure to match the initial list array
     todoList.push({
