@@ -27,14 +27,16 @@ function addTodo() {
   const inputElement = document.querySelector(".js-name-input");
   const name = inputElement.value;
   const dateInputElement = document.querySelector(".js-date-input");
-
+  const dueDate = dateInputElement.value;
   if (name === "") {
     alert("Please enter a task!");
   } else {
     // Fixed: Now pushes an object structure to match the initial list array
     todoList.push({
-      name: name,
-      dueDate: "", // If you add a date selector later, grab its value here
+      // shorthand property names can be used here since the variable names match the object keys
+      // instead of writing name: name, dueDate: dueDate, we can just write name, dueDate
+      name,
+      dueDate,
     });
   }
 
