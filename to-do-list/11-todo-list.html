@@ -9,13 +9,15 @@
   </head>
   <body>
     <p>To Do List</p>
-    <input
-      class="js-name-input"
-      placeholder="Add a new task"
-      onkeydown="calculationkeyDown(event)"
-    />
-    <input type="date" class="js-date-input" />
-    <button onclick="addTodo()">Add</button>
+    <div class="input-container">
+      <input
+        class="js-name-input"
+        placeholder="Add a new task"
+        onkeydown="calculationkeyDown(event)"
+      />
+      <input type="date" class="js-date-input" />
+      <button onclick="addTodo()">Add</button>
+    </div>
     <div class="js-todo-list"></div>
     <p class="tasks"></p>
   </body>
