@@ -7,7 +7,12 @@ function renderTodoList() {
     // const { name, dueDate } = todoObject; // Destructuring assignment (optional)
     const name = todoObject.name;
     const dueDate = todoObject.dueDate;
-    const html = `<p>${name} ${dueDate} <button onclick="todoList.splice(${i}, 1); renderTodoList();">Delete</button></p>`;
+    const html = `
+    <div>${name}</div> 
+    <div>${dueDate}</div> 
+    <button onclick="
+    todoList.splice(${i}, 1); renderTodoList();
+    ">Delete</button>`;
     todoListHTML += html;
   }
   // Moved outside the loop so it clears correctly when the list is empty
