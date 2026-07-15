@@ -56,7 +56,7 @@ for (let i = 1; i < 11; i++) {
   }
 }
 
-for (let i = 1; i <= 24; i++) {
+for (let i = 1; i <= 18; i++) {
   // skips the numbers that are divisible by 3
   if (i % 3 === 0) {
     continue;
@@ -68,3 +68,20 @@ while (i <= 10) {
   console.log(i);
   i++;
 }
+// a function that doubles ALL ARRAYS IN THE FUNCTION
+function doubleArray(nums) {
+  const numsDoubled = [];
+  for (let i = 0; i < nums.length; i++) {
+    // assigns the values in the array "nums" to the variable "num"
+    const num = nums[i];
+    // stops the loop early if the array contains the number 0
+    if (num === 0) {
+      break;
+    }
+    // multiplies the values of num by 2, and then pushes to numsDoubled
+    numsDoubled.push(num * 2);
+  }
+  // returns the values in numsDoubled
+  return numsDoubled;
+}
+console.log(doubleArray([0, 2, 4, 6]));
