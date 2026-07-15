@@ -18,7 +18,6 @@
 // }
 // console.log(randomNumber);
 
-// looping through an
 // i is short for index
 // const todoList = ["make dinner", "wash dishes", "watch youtube"];
 // for (let index = 0; index < todoList.length; i++) {
@@ -85,3 +84,18 @@ function doubleArray(nums) {
   return numsDoubled;
 }
 console.log(doubleArray([0, 2, 4, 6]));
+console.log(doubleArray([4, 2, 4, 6, 7]));
+
+function check() {
+  const words = ["search", "double", "machine", "length"];
+  const targetString = "search";
+  for (let i = 0; i < words.length; i++) {
+    if (words[i] === targetString) {
+      console.log(i);
+      return i;
+    } else {
+      console.log("-1");
+    }
+  }
+}
+check();
