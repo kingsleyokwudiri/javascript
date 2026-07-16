@@ -87,7 +87,7 @@ console.log(doubleArray([0, 2, 4, 6]));
 console.log(doubleArray([4, 2, 4, 6, 7]));
 
 function check() {
-  const words = ["planet", "search", "search", "machine", "length"];
+  const words = ["planet", "bomb", "search", "machine", "search", "length"];
   const targetString = "search";
   let index = -1;
   for (let i = 0; i < words.length; i++) {
@@ -100,3 +100,31 @@ function check() {
   return index;
 }
 check();
+
+function findIndex(array, word) {
+  let index = -1;
+  for (let i = 0; i < word.length; i++) {
+    if (array[i] === word) {
+      index = i;
+      break;
+    }
+  }
+  console.log(index);
+  return index;
+}
+findIndex(["wood", "tree"], "wood");
+
+function removeEgg(foods) {
+  const food = ["beef", "egg", "bread", "egg", "donut", "egg"];
+  const result = [];
+  let removedWords = 0;
+  for (let i = 0; i < food.length; i++) {
+    if (food[i] === foods && removedWords < 2) {
+      removedWords++;
+      continue;
+    }
+    result.push(food[i]);
+  }
+  return result;
+}
+console.log(removeEgg("egg"));
