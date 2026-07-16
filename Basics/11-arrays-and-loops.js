@@ -101,18 +101,18 @@ function check() {
 }
 check();
 
-function findIndex(array, word) {
-  let index = -1;
-  for (let i = 0; i < word.length; i++) {
-    if (array[i] === word) {
-      index = i;
-      break;
-    }
-  }
-  console.log(index);
-  return index;
-}
-findIndex(["wood", "tree"], "wood");
+// function findIndex(array, word) {
+//   let index = -1;
+//   for (let i = 0; i < word.length; i++) {
+//     if (array[i] === word) {
+//       index = i;
+//       break;
+//     }
+//   }
+//   console.log(index);
+//   return index;
+// }
+// findIndex(["wood", "tree"], "wood");
 
 function removeEgg(foods) {
   const food = ["beef", "egg", "bread", "egg", "donut", "egg"];
@@ -128,3 +128,46 @@ function removeEgg(foods) {
   return result;
 }
 console.log(removeEgg("egg"));
+
+function fizzBuzz() {
+  const newWord = ["Fizz", "Buzz", "FizzBuzz"];
+  const result = [];
+  for (let i = 1; i <= 20; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      result.push("FizzBuzz");
+    } else if (i % 3 === 0) {
+      result.push("Fizz");
+    } else if (i % 5 === 0) {
+      result.push("Buzz");
+    } else {
+      result.push(i);
+    }
+  }
+  return result;
+}
+console.log(fizzBuzz());
+
+function findIndex(array, word) {
+  let index = -1;
+  for (let i = 0; i < word.length; i++) {
+    if (array[i] === word) {
+      index = i;
+      break;
+    }
+  }
+  console.log(index);
+  return index;
+}
+findIndex(["wood", "tree"], "wood");
+
+function unique(array) {
+  const result = [];
+  for (let i = 0; i < array.length; i++) {
+    if (!result.includes(array[i])) {
+      result.push(array[i]);
+    }
+  }
+  return result;
+}
+
+console.log(unique(["red", "blue", "blue", "red"]));
