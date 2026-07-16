@@ -1,5 +1,21 @@
 let todoList = [];
 
+function loadTodoList() {
+  const storedTodos = localStorage.getItem("todoList");
+  if (storedTodos) {
+    try {
+      todoList = JSON.parse(storedTodos) || [];
+    } catch (error) {
+      todoList = [];
+      console.error("Failed to load todo list from localStorage:", error);
+    }
+  }
+}
+
+function saveTodoList() {
+  localStorage.setItem("todoList", JSON.stringify(todoList));
+}
+
 function renderTodoList() {
   let todoListHTML = "";
   for (let i = 0; i < todoList.length; i++) {
@@ -17,6 +33,7 @@ function renderTodoList() {
   }
   // Moved outside the loop so it clears correctly when the list is empty
   document.querySelector(".js-todo-list").innerHTML = todoListHTML;
+  saveTodoList();
 }
 
 function addTodo() {
@@ -52,5 +69,6 @@ function calculationkeyDown(event) {
   }
 }
 
-// Initial render to display the default tasks
+// Load tasks from localStorage and render them
+loadTodoList();
 renderTodoList();
