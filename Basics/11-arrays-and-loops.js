@@ -87,15 +87,16 @@ console.log(doubleArray([0, 2, 4, 6]));
 console.log(doubleArray([4, 2, 4, 6, 7]));
 
 function check() {
-  const words = ["search", "double", "machine", "length"];
+  const words = ["planet", "search", "search", "machine", "length"];
   const targetString = "search";
+  let index = -1;
   for (let i = 0; i < words.length; i++) {
     if (words[i] === targetString) {
-      console.log(i);
-      return i;
-    } else {
-      console.log("-1");
+      index = i;
+      break;
     }
   }
+  console.log(index);
+  return index;
 }
 check();
