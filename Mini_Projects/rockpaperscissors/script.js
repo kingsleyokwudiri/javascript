@@ -4,6 +4,14 @@ let score = JSON.parse(localStorage.getItem("score")) || {
   losses: 0,
   ties: 0,
 };
+
+function autoPlay() {
+  setInterval(function () {
+    const playerMove = pickComputerMove();
+    playGame(playerMove);
+  }, 1000);
+}
+
 function updateScoreElement() {
   document.querySelector(".js-score").innerHTML =
     `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
