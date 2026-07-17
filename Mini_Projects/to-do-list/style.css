@@ -16,12 +16,39 @@ body {
   margin-bottom: 15px;
 }
 
+/* New container for the todo list */
+.todo-list-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
+}
+
 .js-todo-list {
   display: grid;
   grid-template-columns: 200px 150px 100px;
   column-gap: 10px;
   row-gap: 10px;
   align-items: center;
+  width: 100%;
+  max-width: 460px; /* 200 + 150 + 100 + 10 + 10 = 470px total */
+}
+
+/* When there are no items, the grid becomes a single column */
+.js-todo-list:empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+}
+
+.empty-message {
+  grid-column: 1 / -1; /* Spans all columns */
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+  padding: 40px 0;
+  width: 100%;
 }
 
 .input-container {
@@ -51,7 +78,6 @@ body {
 
 .clear-button:hover {
   background-color: #d32f2f;
-
 }
 
 .add-button {
