@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <p>To Do List</p>
+    <p class="page-title">To Do List</p>
     <div class="input-container">
       <input
         class="js-name-input"
         placeholder="Add a new task"
-        onkeydown="calculationkeyDown(event)"
+        onkeydown="handleKeyDown(event)"
       />
-      <input type="date" class="js-date-input" />
+      <input
+        type="date"
+        class="js-date-input"
+        onkeydown="handleKeyDown(event)"
+      />
       <button class="add-button" onclick="addTodo()">Add</button>
+      <button class="clear-button" onclick="clearList()">Clear</button>
     </div>
     <div class="js-todo-list"></div>
-    <p class="tasks"></p>
+
+    <script src="script.js"></script>
   </body>
 </html>

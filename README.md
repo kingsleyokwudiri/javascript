@@ -21,11 +21,12 @@ Welcome to my repository! This is a personal archive of all the code, scripts, a
   - The classic game played directly in the browser.
   - _What I learned:_ Comparing user input against computer choices, tracking game scores, and updating the game interface.
 
-## 🏗️ Currently Working On...
+## ✅ Completed Projects
 
 - **📝 To-Do List App**
-  - A productivity app to add, check off, and delete tasks.
-  - _Current Goals:_ Mastering task management, working with arrays, and looking into saving data so tasks stay there even after refreshing the page (Local Storage).
+  - A completed productivity app to add, check off, and delete tasks.
+  - _Completed Features:_ Tasks now persist using Local Storage, so they remain saved even after refreshing the page.
+  - _What I learned:_ Managing task state, updating the DOM dynamically, and storing user data in the browser.
 
 ## 🧠 Core Concepts I Mastered
 

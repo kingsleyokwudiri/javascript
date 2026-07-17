@@ -34,14 +34,21 @@ run(function () {
 // activates a function after a set time in milliseconds
 // 1000ms = 1 second
 // only activates once
-setTimeout(function () {
-  console.log("timeout");
-}, 7000);
-console.log("next line");
-// activates a function after a set time
-// activates more than once
-setInterval(function () {
-  console.log("interval");
-}, 3000);
+// setTimeout(function () {
+//   console.log("timeout");
+// }, 7000);
+// console.log("next line");
+// // activates a function after a set time
+// // activates more than once
+// setInterval(function () {
+//   console.log("interval");
+// }, 3000);
 
-["make dinner", "wash dishes", "watch youtube"];
+// forEach  method is used to loop through an array
+// saves the values of the array in the param "value"
+["make dinner", "wash dishes", "watch youtube"].forEach(
+  function (value, index) {
+    console.log(index);
+    console.log(value);
+  },
+);
