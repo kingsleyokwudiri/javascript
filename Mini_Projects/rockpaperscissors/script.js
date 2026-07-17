@@ -1,36 +1,18 @@
 // Initialize score with default values if it doesn't exist in localStorage
-let score = JSON.parse(localStorage.getItem("score")) || {
-  wins: 0,
-  losses: 0,
-  ties: 0,
-};
+let score;
+try {
+  const storedScore = localStorage.getItem("score");
+  score = storedScore
+    ? JSON.parse(storedScore)
+    : { wins: 0, losses: 0, ties: 0 };
+} catch (e) {
+  // If there's invalid JSON in localStorage, reset it
+  score = { wins: 0, losses: 0, ties: 0 };
+  localStorage.setItem("score", JSON.stringify(score));
+}
+
 let autoplayOn = false;
 let intervalID;
-
-function autoPlay() {
-  if (!autoplayOn) {
-    intervalID = setInterval(function () {
-      const playerMove = pickComputerMove();
-      playGame(playerMove);
-    }, 1000);
-    autoplayOn = true;
-  } else {
-    clearInterval(intervalID);
-    autoplayOn = false;
-  }
-}
-
-function updateScoreElement() {
-  document.querySelector(".js-score").innerHTML =
-    `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-}
-
-function updateResultDisplay(result) {
-  document.querySelector(".js-result").innerHTML = result;
-}
-
-// Initial score render on load
-updateScoreElement();
 
 function pickComputerMove() {
   const randomNumber = Math.random();
@@ -45,6 +27,20 @@ function pickComputerMove() {
   return computerMove;
 }
 
+function updateScoreElement() {
+  const scoreElement = document.querySelector(".js-score");
+  if (scoreElement) {
+    scoreElement.innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+  }
+}
+
+function updateResultDisplay(result) {
+  const resultElement = document.querySelector(".js-result");
+  if (resultElement) {
+    resultElement.innerHTML = result;
+  }
+}
+
 function reset() {
   score.wins = 0;
   score.losses = 0;
@@ -52,7 +48,23 @@ function reset() {
   localStorage.setItem("score", JSON.stringify(score));
   updateScoreElement();
   updateResultDisplay("");
-  document.querySelector(".js-moves").innerHTML = "Scores have been reset!";
+  const movesElement = document.querySelector(".js-moves");
+  if (movesElement) {
+    movesElement.innerHTML = "Scores have been reset!";
+  }
+}
+
+function autoPlay() {
+  if (!autoplayOn) {
+    intervalID = setInterval(function () {
+      const playerMove = pickComputerMove();
+      playGame(playerMove);
+    }, 1000);
+    autoplayOn = true;
+  } else {
+    clearInterval(intervalID);
+    autoplayOn = false;
+  }
 }
 
 function playGame(playerMove) {
@@ -99,11 +111,17 @@ function playGame(playerMove) {
   updateScoreElement();
 
   // Injects the respective emoji elements straight into the interface
-  document.querySelector(".js-moves").innerHTML = `
-    You 
-    <img src="images/${playerMove}-emoji.png" class="move-icon" alt="${playerMove}">
-    vs 
-    <img src="images/${computerMove}-emoji.png" class="move-icon" alt="${computerMove}"> 
-    Computer
-  `;
+  const movesElement = document.querySelector(".js-moves");
+  if (movesElement) {
+    movesElement.innerHTML = `
+      You 
+      <img src="images/${playerMove}-emoji.png" class="move-icon" alt="${playerMove}">
+      vs 
+      <img src="images/${computerMove}-emoji.png" class="move-icon" alt="${computerMove}"> 
+      Computer
+    `;
+  }
 }
+
+// Initial score render on load
+updateScoreElement();

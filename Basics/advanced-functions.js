@@ -43,3 +43,5 @@ console.log("next line");
 setInterval(function () {
   console.log("interval");
 }, 3000);
+
+["make dinner", "wash dishes", "watch youtube"];
