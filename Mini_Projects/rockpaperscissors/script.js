@@ -1,30 +1,23 @@
 // Initialize score with default values if it doesn't exist in localStorage
-let score;
-try {
-  const storedScore = localStorage.getItem("score");
-  score = storedScore
-    ? JSON.parse(storedScore)
-    : { wins: 0, losses: 0, ties: 0 };
-} catch (e) {
-  // If there's invalid JSON in localStorage, reset it
-  score = { wins: 0, losses: 0, ties: 0 };
-  localStorage.setItem("score", JSON.stringify(score));
-}
-
+let score = JSON.parse(localStorage.getItem("score")) || {
+  wins: 0,
+  losses: 0,
+  ties: 0,
+};
 let autoplayOn = false;
 let intervalID;
 
-function pickComputerMove() {
-  const randomNumber = Math.random();
-  let computerMove = "";
-  if (randomNumber >= 0 && randomNumber < 1 / 3) {
-    computerMove = "rock";
-  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-    computerMove = "paper";
-  } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
-    computerMove = "scissors";
+function autoPlay() {
+  if (!autoplayOn) {
+    intervalID = setInterval(function () {
+      const playerMove = pickComputerMove();
+      playGame(playerMove);
+    }, 1000);
+    autoplayOn = true;
+  } else {
+    clearInterval(intervalID);
+    autoplayOn = false;
   }
-  return computerMove;
 }
 
 function updateScoreElement() {
@@ -41,6 +34,22 @@ function updateResultDisplay(result) {
   }
 }
 
+// Initial score render on load
+updateScoreElement();
+
+function pickComputerMove() {
+  const randomNumber = Math.random();
+  let computerMove = "";
+  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+    computerMove = "rock";
+  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+    computerMove = "paper";
+  } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+    computerMove = "scissors";
+  }
+  return computerMove;
+}
+
 function reset() {
   score.wins = 0;
   score.losses = 0;
@@ -54,18 +63,16 @@ function reset() {
   }
 }
 
-function autoPlay() {
-  if (!autoplayOn) {
-    intervalID = setInterval(function () {
-      const playerMove = pickComputerMove();
-      playGame(playerMove);
-    }, 1000);
-    autoplayOn = true;
-  } else {
-    clearInterval(intervalID);
-    autoplayOn = false;
+// Keyboard shortcut handler
+document.addEventListener("keydown", function (event) {
+  if (event.key === "1") {
+    playGame("rock");
+  } else if (event.key === "2") {
+    playGame("paper");
+  } else if (event.key === "3") {
+    playGame("scissors");
   }
-}
+});
 
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
@@ -122,6 +129,3 @@ function playGame(playerMove) {
     `;
   }
 }
-
-// Initial score render on load
-updateScoreElement();
