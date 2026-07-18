@@ -9,15 +9,17 @@
   </head>
   <body>
     <p>Pick Heads or Tails</p>
-    <button onclick="coinSide('heads')">Heads</button>
-    <button onclick="coinSide('tails')">Tails</button>
+    <div class="coin-sides">
+      <button onclick="coinSide('heads')" class="game-button">Heads</button>
+      <button onclick="coinSide('tails')" class="game-button">Tails</button>
+    </div>
     <p>Click to show your choice</p>
-    <button onclick="showSide()">Show Side</button>
+    <button onclick="showSide()" class="game-button">Show Side</button>
     <p>Click to Flip Coin</p>
-    <button onclick="flipCoin()">Flip Coin</button>
+    <button onclick="flipCoin()" class="game-button">Flip Coin</button>
     <p>Click to reset scores</p>
-    <button onclick="resetScores()">Reset Scores</button>
+    <button onclick="resetScores()" class="game-button">Reset Scores</button>
     <p>Click to show scores</p>
-    <button onclick="showScores()">Show Scores</button>
+    <button onclick="showScores()" class="game-button">Show Scores</button>
   </body>
 </html>
