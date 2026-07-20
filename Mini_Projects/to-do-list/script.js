@@ -17,29 +17,27 @@ function saveTodoList() {
 }
 
 function renderTodoList() {
-  let todoListHTML = "";
+  const container = document.querySelector(".js-todo-list");
 
   if (todoList.length === 0) {
-    todoListHTML =
-      '<div class="empty-message">No tasks yet. Add one above!</div>';
-  } else {
-    todoList.forEach(function (todoObject, index) {
-      for (let i = 0; i < todoList.length; i++) {
-        const name = todoObject.name;
-        const dueDate = todoObject.dueDate;
-        // or const { name, dueDate} = todoObject;
-        const html = `
-      <div>${name}</div> 
-      <div>${dueDate}</div> 
-      <button class="delete-button" onclick="
-      todoList.splice(${i}, 1); renderTodoList(); saveTodoList();
-      ">Delete</button>`;
-        todoListHTML += html;
-      }
-    });
+    container.innerHTML =
+      '<div class="empty-message">✅ No tasks yet. Add one above!</div>';
+    return;
   }
 
-  document.querySelector(".js-todo-list").innerHTML = todoListHTML;
+  let todoListHTML = "";
+  todoList.forEach(function (todoObject, index) {
+    const name = todoObject.name || "Untitled";
+    const dueDate = todoObject.dueDate || "No date";
+    const html = `
+      <div>${name}</div> 
+      <div>${dueDate}</div> 
+      <button class="delete-button" data-index="${index}">Delete</button>
+    `;
+    todoListHTML += html;
+  });
+
+  container.innerHTML = todoListHTML;
 }
 
 function addTodo() {
@@ -52,8 +50,10 @@ function addTodo() {
     alert("Please enter a task!");
     inputElement.focus();
     return;
-  } else if (dueDate === "") {
-    alert("Please enter a date!");
+  }
+
+  if (dueDate === "") {
+    alert("Please select a date!");
     dateInputElement.focus();
     return;
   }
@@ -66,9 +66,16 @@ function addTodo() {
 }
 
 function clearList() {
-  todoList = [];
-  saveTodoList();
-  renderTodoList();
+  if (todoList.length === 0) {
+    alert("Your list is already empty!");
+    return;
+  }
+
+  if (confirm("Are you sure you want to delete all tasks?")) {
+    todoList = [];
+    saveTodoList();
+    renderTodoList();
+  }
 }
 
 function handleKeyDown(event) {
@@ -76,6 +83,30 @@ function handleKeyDown(event) {
     addTodo();
   }
 }
+
+// Event delegation for delete buttons
+document.querySelector(".js-todo-list").addEventListener("click", (event) => {
+  if (event.target.classList.contains("delete-button")) {
+    const index = parseInt(event.target.dataset.index);
+    if (!isNaN(index)) {
+      todoList.splice(index, 1);
+      saveTodoList();
+      renderTodoList();
+    }
+  }
+});
+
+// Event listeners for buttons
+document.querySelector(".add-button").addEventListener("click", addTodo);
+document.querySelector(".clear-button").addEventListener("click", clearList);
+
+// Keyboard support for inputs
+document
+  .querySelector(".js-name-input")
+  .addEventListener("keydown", handleKeyDown);
+document
+  .querySelector(".js-date-input")
+  .addEventListener("keydown", handleKeyDown);
 
 // Load tasks from localStorage and render them
 loadTodoList();

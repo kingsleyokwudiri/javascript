@@ -8,100 +8,218 @@ body {
   align-items: center;
   padding: 20px;
   box-sizing: border-box;
+  background: #f5f5f5;
 }
 
 .page-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
+  color: #333;
 }
 
-/* New container for the todo list */
-.todo-list-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.js-todo-list {
-  display: grid;
-  grid-template-columns: 200px 150px 100px;
-  column-gap: 10px;
-  row-gap: 10px;
-  align-items: center;
-  width: 100%;
-  max-width: 460px; /* 200 + 150 + 100 + 10 + 10 = 470px total */
-}
-
-/* When there are no items, the grid becomes a single column */
-.js-todo-list:empty {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px;
-}
-
-.empty-message {
-  grid-column: 1 / -1; /* Spans all columns */
-  text-align: center;
-  color: #999;
-  font-size: 18px;
-  padding: 40px 0;
-  width: 100%;
-}
-
+/* Input Container */
 .input-container {
   display: grid;
-  grid-template-columns: 200px 150px 100px 100px;
-  column-gap: 10px;
-  row-gap: 10px;
+  grid-template-columns: 1fr 1fr auto auto;
+  gap: 10px;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 500px;
 }
 
-.js-name-input, .js-date-input {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-weight: 15px;
+.js-name-input,
+.js-date-input {
+  padding: 10px 8px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.clear-button {
-  padding: 5px 10px;
-  background-color: #f44336;
-  color: white;
+.js-name-input:focus,
+.js-date-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+/* Buttons */
+.add-button,
+.clear-button,
+.delete-button {
+  padding: 10px 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
-}
-
-.clear-button:hover {
-  background-color: #d32f2f;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-width: 70px;
 }
 
 .add-button {
-  padding: 5px 10px;
   background-color: #4CAF50;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .add-button:hover {
   background-color: #45a049;
+  transform: scale(1.02);
+}
+
+.add-button:active {
+  transform: scale(0.95);
+}
+
+.add-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4);
+}
+
+.clear-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.clear-button:hover {
+  background-color: #d32f2f;
+  transform: scale(1.02);
+}
+
+.clear-button:active {
+  transform: scale(0.95);
+}
+
+.clear-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4);
 }
 
 .delete-button {
-  padding: 5px 10px;
   background-color: #f44336;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  padding: 6px 12px;
+  font-size: 13px;
+  min-width: 60px;
 }
 
 .delete-button:hover {
   background-color: #d32f2f;
+  transform: scale(1.02);
+}
+
+.delete-button:active {
+  transform: scale(0.95);
+}
+
+.delete-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4);
+}
+
+/* Todo List */
+.js-todo-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 0;
+}
+
+/* Individual todo items */
+.js-todo-list > div {
+  padding: 8px 0;
+  word-break: break-word;
+}
+
+.js-todo-list > div:first-child {
+  font-weight: 500;
+}
+
+/* Empty message styling - shown in JavaScript, not as :empty */
+.empty-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #666;
+  font-size: 18px;
+  padding: 40px 0;
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 550px) {
+  .input-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .add-button,
+  .clear-button {
+    grid-column: span 1;
+    padding: 10px;
+    font-size: 13px;
+    min-width: unset;
+  }
+
+  .js-todo-list {
+    grid-template-columns: 1fr 1fr auto;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .page-title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 400px) {
+  .input-container {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .add-button,
+  .clear-button {
+    grid-column: span 1;
+  }
+
+  .js-todo-list {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .js-todo-list > div {
+    padding: 4px 0;
+  }
+
+  .delete-button {
+    justify-self: center;
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .empty-message {
+    font-size: 16px;
+    padding: 30px 0;
+  }
+
+  .page-title {
+    font-size: 18px;
+  }
+
+  .js-name-input,
+  .js-date-input {
+    padding: 8px 6px;
+    font-size: 14px;
+  }
 }

@@ -7,22 +7,26 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <p class="page-title">To Do List</p>
+    <h1 class="page-title">To Do List</h1>
+
     <div class="input-container">
       <input
         class="js-name-input"
         placeholder="Add a new task"
-        onkeydown="handleKeyDown(event)"
+        aria-label="New task name"
+        id="taskInput"
       />
       <input
         type="date"
         class="js-date-input"
-        onkeydown="handleKeyDown(event)"
+        aria-label="Due date"
+        id="dateInput"
       />
-      <button class="add-button" onclick="addTodo()">Add</button>
-      <button class="clear-button" onclick="clearList()">Clear</button>
+      <button type="button" class="add-button">Add</button>
+      <button type="button" class="clear-button">Clear</button>
     </div>
-    <div class="js-todo-list"></div>
+
+    <div class="js-todo-list" role="list" aria-label="Task list"></div>
 
     <script src="script.js"></script>
   </body>
