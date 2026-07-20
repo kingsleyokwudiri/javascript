@@ -7,9 +7,14 @@ let score = JSON.parse(localStorage.getItem("score")) || {
 let autoplayOn = false;
 let intervalID;
 
+// const autoPlay = () => {
+
+// };
+
 function autoPlay() {
   if (!autoplayOn) {
-    intervalID = setInterval(function () {
+    // arrow function
+    intervalID = setInterval(() => {
       const playerMove = pickComputerMove();
       playGame(playerMove);
     }, 1000);
@@ -35,7 +40,7 @@ function updateResultDisplay(result) {
 }
 
 // Initial score render on load
-updateScoreElement();
+// updateScoreElement();
 
 function pickComputerMove() {
   const randomNumber = Math.random();

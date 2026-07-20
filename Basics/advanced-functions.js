@@ -73,16 +73,18 @@ run(function () {
 
 // arrow function
 // works like a regular function
-const arrowWFunction = () => {
-  console.log("hello");
-};
-arrowWFunction();
+// const arrowWFunction = () => {
+//   console.log("hello");
+// };
+// arrowWFunction();
 
-["make dinner", "wash dishes", "watch youtube"].forEach((value, index) => {
-  if (value === "wash dishes") {
-    // skips "wash dishes"
-    return;
-  }
-  console.log(index);
-  console.log(value);
-});
+// ["make dinner", "wash dishes", "watch youtube"].forEach((value, index) => {
+//   if (value === "wash dishes") {
+//     // skips "wash dishes"
+//     return;
+//   }
+//   console.log(index);
+//   console.log(value);
+// });
+
+const buttonElement = document.querySelector(".js-button");
