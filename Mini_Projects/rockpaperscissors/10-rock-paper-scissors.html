@@ -9,34 +9,38 @@
   <body>
     <h1 class="title">Rock Paper Scissors</h1>
 
-    <div class="button-row">
-      <button class="rock-game-button">
-        <img src="images/rock-emoji.png" alt="Rock" />
+    <div class="button-row" role="group" aria-label="Game moves">
+      <button class="rock-game-button" data-move="rock" aria-label="Rock">
+        <img src="images/rock-emoji.png" alt="" aria-hidden="true" />
       </button>
-      <button class="paper-game-button">
-        <img src="images/paper-emoji.png" alt="Paper" />
+      <button class="paper-game-button" data-move="paper" aria-label="Paper">
+        <img src="images/paper-emoji.png" alt="" aria-hidden="true" />
       </button>
-      <button class="scissors-game-button">
-        <img src="images/scissors-emoji.png" alt="Scissors" />
+      <button
+        class="scissors-game-button"
+        data-move="scissors"
+        aria-label="Scissors"
+      >
+        <img src="images/scissors-emoji.png" alt="" aria-hidden="true" />
       </button>
     </div>
 
-    <div class="score-board">
+    <div class="score-board" aria-live="polite">
       <p class="js-result"></p>
       <p class="js-moves"></p>
       <p class="js-score"></p>
     </div>
 
     <div class="control-buttons">
-      <button class="action-btn" onclick="reset()">Reset score</button>
-      <button class="action-btn" onclick="updateScoreElement()">
-        Show Scores
-      </button>
-      <button class="autoplay-btn" onclick="autoPlay()">Autoplay</button>
+      <button class="reset-btn" type="button">Reset score</button>
+      <button class="score-btn" type="button">Show Scores</button>
+      <button class="autoplay-btn" type="button">Autoplay</button>
     </div>
+
     <div class="autoplay-message">
       <p class="autoPlay-message"></p>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

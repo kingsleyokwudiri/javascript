@@ -19,24 +19,65 @@ document
     playGame("scissors");
   });
 
-let autoplayOn = false;
-let intervalID;
+document.querySelector(".autoplay-btn").addEventListener("click", autoPlay);
 
-// const autoPlay = () => {
+// Reset button handler
+document.querySelector(".reset-btn").addEventListener("click", reset);
 
-// };
+// Show Scores button handler
+document
+  .querySelector(".score-btn")
+  .addEventListener("click", updateScoreElement);
+
+// Autoplay variables
+let isAutoPlaying = false;
+let intervalId = null;
+
+// Update autoplay message display
+function updateAutoplayMessage() {
+  const messageElement = document.querySelector(".autoPlay-message");
+  if (messageElement) {
+    if (isAutoPlaying) {
+      messageElement.textContent = "▶️ Autoplay is ON";
+      messageElement.style.color = "#4CAF50";
+    } else {
+      messageElement.textContent = "⏹️ Autoplay is OFF";
+      messageElement.style.color = "#f44336";
+    }
+  }
+}
 
 function autoPlay() {
-  if (!autoplayOn) {
-    // arrow function
-    intervalID = setInterval(() => {
+  if (!isAutoPlaying) {
+    // Start autoplay
+    intervalId = setInterval(() => {
       const playerMove = pickComputerMove();
       playGame(playerMove);
     }, 1000);
-    autoplayOn = true;
+    isAutoPlaying = true;
+
+    // Change button text to show autoplay is on
+    const autoPlayBtn = document.querySelector(".autoplay-btn");
+    if (autoPlayBtn) {
+      autoPlayBtn.textContent = "Stop Autoplay";
+    }
+
+    // Update autoplay message
+    updateAutoplayMessage();
   } else {
-    clearInterval(intervalID);
-    autoplayOn = false;
+    // Stop autoplay
+    clearInterval(intervalId);
+    intervalId = null;
+    isAutoPlaying = false;
+
+    // Change button text back
+    const autoPlayBtn = document.querySelector(".autoplay-btn");
+    if (autoPlayBtn) {
+      autoPlayBtn.textContent = "Autoplay";
+    }
+
+    // Update autoplay message
+    updateAutoplayMessage();
   }
 }
 
@@ -71,6 +112,19 @@ function pickComputerMove() {
 }
 
 function reset() {
+  // Stop autoplay if it's running
+  if (isAutoPlaying) {
+    clearInterval(intervalId);
+    intervalId = null;
+    isAutoPlaying = false;
+
+    const autoPlayBtn = document.querySelector(".autoplay-btn");
+    if (autoPlayBtn) {
+      autoPlayBtn.textContent = "Autoplay";
+    }
+    updateAutoplayMessage();
+  }
+
   score.wins = 0;
   score.losses = 0;
   score.ties = 0;

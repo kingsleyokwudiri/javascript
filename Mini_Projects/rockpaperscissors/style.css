@@ -1,22 +1,22 @@
 body {
+  align-items: center;
   background-color: rgb(25, 25, 25);
+  box-sizing: border-box;
   color: white;
-  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  font-family: Arial, sans-serif;
   justify-content: center;
-  min-height: 100vh;
   margin: 0;
+  min-height: 100vh;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .title {
   font-size: 36px;
   font-weight: bold;
-  text-align: center;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .button-row {
@@ -26,88 +26,68 @@ body {
   margin-bottom: 2rem;
 }
 
-.rock-game-button {
-  background-color: transparent;
-  border: 3px solid white;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
-.paper-game-button {
-  background-color: transparent;
-  border: 3px solid white;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-}
-
+.rock-game-button,
+.paper-game-button,
 .scissors-game-button {
+  align-items: center;
   background-color: transparent;
   border: 3px solid white;
-  width: 120px;
-  height: 120px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
-  align-items: center;
+  height: 120px;
   justify-content: center;
   transition: all 0.2s ease;
+  width: 120px;
 }
 
-.rock-game-button img {
-  height: 60px;
-  width: 60px;
-  object-fit: contain;
-}
-.paper-game-button img {
-  height: 60px;
-  width: 60px;
-  object-fit: contain;
-}
+.rock-game-button img,
+.paper-game-button img,
 .scissors-game-button img {
   height: 60px;
-  width: 60px;
   object-fit: contain;
+  width: 60px;
 }
 
-.rock-game-button:hover {
+.rock-game-button:hover,
+.paper-game-button:hover,
+.scissors-game-button:hover {
   background-color: rgba(250, 250, 250, 0.1);
   transform: scale(1.05);
 }
 
-.rock-button:active {
+.rock-game-button:active,
+.paper-game-button:active,
+.scissors-game-button:active {
   transform: scale(0.95);
 }
 
-.paper-game-button:hover {
-  background-color: rgba(250, 250, 250, 0.1);
-  transform: scale(1.05);
+/* Focus states for accessibility */
+.rock-game-button:focus-visible,
+.paper-game-button:focus-visible,
+.scissors-game-button:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 4px;
 }
 
-.paper-button:active {
+.reset-btn:active,
+.score-btn:active,
+.autoplay-btn:active {
   transform: scale(0.95);
 }
 
-.action-btn:active, .autoplay-btn:active {
-  transform: scale(0.95);
+/* Focus states for control buttons */
+.reset-btn:focus-visible,
+.score-btn:focus-visible,
+.autoplay-btn:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 2px;
 }
-
 
 .score-board {
-  text-align: center;
   margin-bottom: 2rem;
-  min-height: 140px; /* Prevents text bouncing when rounds run */
+  min-height: 140px;
+  text-align: center;
 }
 
 .js-result {
@@ -117,42 +97,167 @@ body {
 }
 
 .js-moves {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  display: flex;
   font-size: 20px;
+  gap: 12px;
+  justify-content: center;
   margin-bottom: 15px;
 }
 
 .move-icon {
   height: 50px;
-  width: 50px;
   object-fit: contain;
+  width: 50px;
 }
 
 .js-score {
-  font-size: 18px;
   color: #ccc;
+  font-size: 18px;
 }
 
 .control-buttons {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.action-btn, .autoplay-btn {
+.reset-btn,
+.score-btn,
+.autoplay-btn {
   background-color: white;
-  color: black;
   border: none;
-  padding: 10px 20px;
+  border-radius: 4px;
+  color: black;
+  cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: opacity 0.2s;
+  padding: 10px 20px;
+  transition: all 0.2s ease;
 }
 
-.action-btn:hover, .autoplay-btn:hover {
+.reset-btn:hover,
+.score-btn:hover,
+.autoplay-btn:hover {
   opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Autoplay message styling */
+.autoplay-message {
+  margin-top: 1rem;
+  min-height: 30px;
+  text-align: center;
+}
+
+.autoPlay-message {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .title {
+    font-size: 28px;
+  }
+
+  .rock-game-button,
+  .paper-game-button,
+  .scissors-game-button {
+    height: 90px;
+    width: 90px;
+  }
+
+  .rock-game-button img,
+  .paper-game-button img,
+  .scissors-game-button img {
+    height: 45px;
+    width: 45px;
+  }
+
+  .button-row {
+    gap: 15px;
+  }
+
+  .js-result {
+    font-size: 22px;
+  }
+
+  .js-moves {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .move-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .reset-btn,
+  .score-btn,
+  .autoplay-btn {
+    font-size: 14px;
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  .score-board {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .title {
+    font-size: 22px;
+  }
+
+  .rock-game-button,
+  .paper-game-button,
+  .scissors-game-button {
+    height: 70px;
+    width: 70px;
+  }
+
+  .rock-game-button img,
+  .paper-game-button img,
+  .scissors-game-button img {
+    height: 35px;
+    width: 35px;
+  }
+
+  .button-row {
+    gap: 10px;
+  }
+
+  .js-result {
+    font-size: 18px;
+  }
+
+  .js-moves {
+    font-size: 14px;
+  }
+
+  .move-icon {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+/* Disabled state (if needed) */
+.reset-btn:disabled,
+.score-btn:disabled,
+.autoplay-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none !important;
 }
