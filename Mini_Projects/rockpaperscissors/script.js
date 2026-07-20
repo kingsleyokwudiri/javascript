@@ -25,6 +25,20 @@ function autoPlay() {
   }
 }
 
+document.querySelector(".rock-game-button").addEventListener("click", () => {
+  playGame("rock");
+});
+
+document.querySelector(".paper-game-button").addEventListener("click", () => {
+  playGame("paper");
+});
+
+document
+  .querySelector(".scissors-game-button")
+  .addEventListener("click", () => {
+    playGame("scissors");
+  });
+
 function updateScoreElement() {
   const scoreElement = document.querySelector(".js-score");
   if (scoreElement) {
