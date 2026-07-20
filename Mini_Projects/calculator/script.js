@@ -1,10 +1,14 @@
-// Get display element
-const displayElement = document.getElementById("displayText");
+// Get display elements
+const displayResult = document.getElementById("displayText");
+const displayExpression = document.getElementById("displayExpression");
 
 // Function to update display
-function updateDisplay(value) {
-  if (displayElement) {
-    displayElement.textContent = value || "0";
+function updateDisplay(value, expression = "") {
+  if (displayResult) {
+    displayResult.textContent = value || "0";
+  }
+  if (displayExpression) {
+    displayExpression.textContent = expression || "";
   }
 }
 
@@ -27,8 +31,10 @@ function pressAction(action) {
   firstNumber = parseFloat(currentInput);
   activeAction = action;
   currentInput = "";
-  // Show the number and operator together
-  updateDisplay(firstNumber + " " + getOperatorSymbol(action));
+
+  // Show the full expression with first number and operator
+  const symbol = getOperatorSymbol(action);
+  updateDisplay(firstNumber + " " + symbol + " ", firstNumber + " " + symbol);
 }
 
 // Helper function for display symbols
@@ -53,15 +59,29 @@ function pressNumber(num) {
   } else {
     currentInput += num.toString();
   }
-  updateDisplay(currentInput);
+
+  // Show current input in result area, keep expression if it exists
+  const expression = displayExpression.textContent || "";
+  const exprParts = expression.split(" ");
+  if (exprParts.length > 1) {
+    // We have an operator, show expression + current input
+    updateDisplay(currentInput, exprParts[0] + " " + exprParts[1] + " ");
+  } else {
+    updateDisplay(currentInput);
+  }
 }
 
-// NEW: Decimal support
 function pressDecimal() {
   // If current input is empty, start with "0."
   if (currentInput === "") {
     currentInput = "0.";
-    updateDisplay(currentInput);
+    const expression = displayExpression.textContent || "";
+    const exprParts = expression.split(" ");
+    if (exprParts.length > 1) {
+      updateDisplay(currentInput, exprParts[0] + " " + exprParts[1] + " ");
+    } else {
+      updateDisplay(currentInput);
+    }
     return;
   }
 
@@ -72,18 +92,24 @@ function pressDecimal() {
 
   // Add decimal point
   currentInput += ".";
-  updateDisplay(currentInput);
+  const expression = displayExpression.textContent || "";
+  const exprParts = expression.split(" ");
+  if (exprParts.length > 1) {
+    updateDisplay(currentInput, exprParts[0] + " " + exprParts[1] + " ");
+  } else {
+    updateDisplay(currentInput);
+  }
 }
 
 function showResult() {
   if (savedResult !== null && savedResult !== undefined) {
     alert("Saved result: " + savedResult);
-    updateDisplay(savedResult);
+    updateDisplay(savedResult, "");
     // Set currentInput to saved result for continued calculations
     currentInput = savedResult.toString();
   } else {
     alert("No saved result found");
-    updateDisplay("0");
+    updateDisplay("0", "");
   }
 }
 
@@ -102,20 +128,25 @@ function pressEquals() {
   }
 
   let result = 0;
+  let expression = "";
 
   if (activeAction === "+") {
     result = firstNumber + secondNumber;
+    expression = firstNumber + " + " + secondNumber + " =";
   } else if (activeAction === "-") {
     result = firstNumber - secondNumber;
+    expression = firstNumber + " − " + secondNumber + " =";
   } else if (activeAction === "*") {
     result = firstNumber * secondNumber;
+    expression = firstNumber + " × " + secondNumber + " =";
   } else if (activeAction === "/") {
     if (secondNumber === 0) {
       alert("Error: Division by zero is not allowed.");
-      updateDisplay("Error");
+      updateDisplay("Error", "");
       return;
     }
     result = firstNumber / secondNumber;
+    expression = firstNumber + " ÷ " + secondNumber + " =";
   } else {
     alert("Please select an action first.");
     return;
@@ -129,7 +160,9 @@ function pressEquals() {
   localStorage.setItem("result", JSON.stringify(result));
   activeAction = "";
   firstNumber = 0;
-  updateDisplay(result);
+
+  // Show full calculation and result
+  updateDisplay(result, expression);
 }
 
 function resetCalculator() {
@@ -138,13 +171,13 @@ function resetCalculator() {
   activeAction = "";
   savedResult = null;
   localStorage.removeItem("result");
-  updateDisplay("0");
+  updateDisplay("0", "");
 }
 
 // Initialize display
 if (savedResult !== null) {
-  updateDisplay(savedResult);
+  updateDisplay(savedResult, "");
   currentInput = savedResult.toString();
 } else {
-  updateDisplay("0");
+  updateDisplay("0", "");
 }
