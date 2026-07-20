@@ -181,3 +181,41 @@ if (savedResult !== null) {
 } else {
   updateDisplay("0", "");
 }
+
+// --- Event Listeners using document.querySelector ---
+
+// Number buttons
+document.querySelectorAll("[data-value]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const value = parseInt(button.getAttribute("data-value"));
+    pressNumber(value);
+  });
+});
+
+// Operator buttons
+document.querySelectorAll(".operator").forEach((button) => {
+  button.addEventListener("click", () => {
+    const action = button.getAttribute("data-action");
+    pressAction(action);
+  });
+});
+
+// Decimal button
+document.querySelector(".decimal")?.addEventListener("click", () => {
+  pressDecimal();
+});
+
+// Equals button
+document.querySelector(".equals")?.addEventListener("click", () => {
+  pressEquals();
+});
+
+// Reset button
+document.querySelector(".reset")?.addEventListener("click", () => {
+  resetCalculator();
+});
+
+// Show result button
+document.querySelector(".show-result")?.addEventListener("click", () => {
+  showResult();
+});

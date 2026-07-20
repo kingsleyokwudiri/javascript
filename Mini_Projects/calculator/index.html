@@ -16,32 +16,32 @@
 
       <div class="buttons">
         <!-- Row 1 -->
-        <button onclick="pressNumber(7)">7</button>
-        <button onclick="pressNumber(8)">8</button>
-        <button onclick="pressNumber(9)">9</button>
-        <button class="operator" onclick="pressAction('/')">÷</button>
+        <button data-value="7">7</button>
+        <button data-value="8">8</button>
+        <button data-value="9">9</button>
+        <button class="operator" data-action="/">÷</button>
 
         <!-- Row 2 -->
-        <button onclick="pressNumber(4)">4</button>
-        <button onclick="pressNumber(5)">5</button>
-        <button onclick="pressNumber(6)">6</button>
-        <button class="operator" onclick="pressAction('*')">×</button>
+        <button data-value="4">4</button>
+        <button data-value="5">5</button>
+        <button data-value="6">6</button>
+        <button class="operator" data-action="*">×</button>
 
         <!-- Row 3 -->
-        <button onclick="pressNumber(1)">1</button>
-        <button onclick="pressNumber(2)">2</button>
-        <button onclick="pressNumber(3)">3</button>
-        <button class="operator" onclick="pressAction('-')">−</button>
+        <button data-value="1">1</button>
+        <button data-value="2">2</button>
+        <button data-value="3">3</button>
+        <button class="operator" data-action="-">−</button>
 
         <!-- Row 4 -->
-        <button onclick="pressNumber(0)">0</button>
-        <button onclick="pressDecimal()">.</button>
-        <button class="operator" onclick="pressAction('+')">+</button>
-        <button class="equals" onclick="pressEquals()">=</button>
+        <button data-value="0">0</button>
+        <button class="decimal" data-action=".">.</button>
+        <button class="operator" data-action="+">+</button>
+        <button class="equals" data-action="=">=</button>
 
         <!-- Row 5 -->
-        <button class="reset" onclick="resetCalculator()">Reset</button>
-        <button class="show-result" onclick="showResult()">Show</button>
+        <button class="reset" data-action="reset">Reset</button>
+        <button class="show-result" data-action="show">Show</button>
       </div>
     </div>
 
