@@ -3,23 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Coin Flip Game</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="coin-flip.js"></script>
   </head>
   <body>
     <p>Pick Heads or Tails</p>
     <div class="coin-sides">
-      <button onclick="coinSide('heads')" class="game-button">Heads</button>
-      <button onclick="coinSide('tails')" class="game-button">Tails</button>
+      <button class="heads-face-button">Heads</button>
+      <button class="tails-face-button">Tails</button>
     </div>
+
     <p>Click to show your choice</p>
-    <button onclick="showSide()" class="game-button">Show Side</button>
+    <button class="coin-side-button">Show Side</button>
+
     <p>Click to Flip Coin</p>
-    <button onclick="flipCoin()" class="game-button">Flip Coin</button>
+    <button class="flip-button">Flip Coin</button>
+
     <p>Click to reset scores</p>
-    <button onclick="resetScores()" class="game-button">Reset Scores</button>
+    <button class="reset-button">Reset Scores</button>
+
     <p>Click to show scores</p>
-    <button onclick="showScores()" class="game-button">Show Scores</button>
+    <button class="score-button">Show Scores</button>
+
+    <script src="coin-flip.js"></script>
   </body>
 </html>

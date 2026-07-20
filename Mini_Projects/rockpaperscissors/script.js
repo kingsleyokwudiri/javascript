@@ -4,6 +4,21 @@ let score = JSON.parse(localStorage.getItem("score")) || {
   losses: 0,
   ties: 0,
 };
+
+document.querySelector(".rock-game-button").addEventListener("click", () => {
+  playGame("rock");
+});
+
+document.querySelector(".paper-game-button").addEventListener("click", () => {
+  playGame("paper");
+});
+
+document
+  .querySelector(".scissors-game-button")
+  .addEventListener("click", () => {
+    playGame("scissors");
+  });
+
 let autoplayOn = false;
 let intervalID;
 
@@ -24,20 +39,6 @@ function autoPlay() {
     autoplayOn = false;
   }
 }
-
-document.querySelector(".rock-game-button").addEventListener("click", () => {
-  playGame("rock");
-});
-
-document.querySelector(".paper-game-button").addEventListener("click", () => {
-  playGame("paper");
-});
-
-document
-  .querySelector(".scissors-game-button")
-  .addEventListener("click", () => {
-    playGame("scissors");
-  });
 
 function updateScoreElement() {
   const scoreElement = document.querySelector(".js-score");

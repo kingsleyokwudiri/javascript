@@ -11,7 +11,8 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
-.game-button {
+
+.heads-face-button {
   background-color: white;
   color: black;
   border: none;
@@ -24,14 +25,125 @@ body {
   margin-bottom: 20px;
 }
 
-.game-button:hover {
+.tails-face-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.coin-side-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.flip-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.reset-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.score-button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.heads-face-button:hover {
   background-color: rgb(170, 170, 170);
   transform: scale(1.05);
 }
 
-.game-button:active {
+.heads-face-button:active {
   transform: scale(0.95);
 }
+
+.tails-face-button:hover {
+  background-color: rgb(170, 170, 170);
+  transform: scale(1.05);
+}
+
+.tails-face-button:active {
+  transform: scale(0.95);
+}
+
+.coin-side-button:hover {
+  background-color: rgb(170, 170, 170);
+  transform: scale(1.05);
+}
+
+.coin-side-button:active {
+  transform: scale(0.95);
+}
+
+.flip-button:hover {
+  background-color: rgb(170, 170, 170);
+  transform: scale(1.05);
+}
+
+.flip-button:active {
+  transform: scale(0.95);
+}
+
+.reset-button:hover {
+  background-color: rgb(170, 170, 170);
+  transform: scale(1.05);
+}
+
+.reset-button:active {
+  transform: scale(0.95);
+}
+
+.score-button:hover {
+  background-color: rgb(170, 170, 170);
+  transform: scale(1.05);
+}
+
+.score-button:active {
+  transform: scale(0.95);
+}
+
 .coin-sides {
   display: flex;
   gap: 15px;
