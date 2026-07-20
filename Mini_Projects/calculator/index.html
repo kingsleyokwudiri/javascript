@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="heading">Calculator</h1>
+
+    <div class="calculator-container">
+      <!-- Display block -->
+      <div class="display" id="display">
+        <span id="displayText">0</span>
+      </div>
+
+      <div class="buttons">
+        <!-- Row 1 -->
+        <button onclick="pressNumber(7)">7</button>
+        <button onclick="pressNumber(8)">8</button>
+        <button onclick="pressNumber(9)">9</button>
+        <button class="operator" onclick="pressAction('/')">÷</button>
+
+        <!-- Row 2 -->
+        <button onclick="pressNumber(4)">4</button>
+        <button onclick="pressNumber(5)">5</button>
+        <button onclick="pressNumber(6)">6</button>
+        <button class="operator" onclick="pressAction('*')">×</button>
+
+        <!-- Row 3 -->
+        <button onclick="pressNumber(1)">1</button>
+        <button onclick="pressNumber(2)">2</button>
+        <button onclick="pressNumber(3)">3</button>
+        <button class="operator" onclick="pressAction('-')">−</button>
+
+        <!-- Row 4 -->
+        <button class="zero" onclick="pressNumber(0)">0</button>
+        <button class="operator" onclick="pressAction('+')">+</button>
+        <button class="equals" onclick="pressEquals()">=</button>
+
+        <!-- Row 5 -->
+        <button class="reset" onclick="resetCalculator()">Reset</button>
+        <button class="show-result" onclick="showResult()">Show</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
