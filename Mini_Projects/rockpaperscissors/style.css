@@ -26,7 +26,7 @@ body {
   margin-bottom: 2rem;
 }
 
-.game-button {
+.rock-game-button {
   background-color: transparent;
   border: 3px solid white;
   width: 120px;
@@ -39,22 +39,70 @@ body {
   transition: all 0.2s ease;
 }
 
-.game-button:hover {
-  background-color: rgba(250, 250, 250, 0.1);
-  transform: scale(1.05);
-}
-.game-button:active {
-  transform: scale(0.95);
-}
-.action-btn:active, .autoplay-btn:active {
-  transform: scale(0.95);
+.paper-game-button {
+  background-color: transparent;
+  border: 3px solid white;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
 }
 
-.game-button img {
+.scissors-game-button {
+  background-color: transparent;
+  border: 3px solid white;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.rock-game-button img {
   height: 60px;
   width: 60px;
   object-fit: contain;
 }
+.paper-game-button img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+}
+.scissors-game-button img {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+}
+
+.rock-game-button:hover {
+  background-color: rgba(250, 250, 250, 0.1);
+  transform: scale(1.05);
+}
+
+.rock-button:active {
+  transform: scale(0.95);
+}
+
+.paper-game-button:hover {
+  background-color: rgba(250, 250, 250, 0.1);
+  transform: scale(1.05);
+}
+
+.paper-button:active {
+  transform: scale(0.95);
+}
+
+.action-btn:active, .autoplay-btn:active {
+  transform: scale(0.95);
+}
+
 
 .score-board {
   text-align: center;

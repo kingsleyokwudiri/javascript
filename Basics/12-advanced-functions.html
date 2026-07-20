@@ -7,14 +7,23 @@
     <!-- <script src="advanced-functions.js"></script> -->
   </head>
   <body>
-    <button onclick=""; class="js-button">Click</button>
+    <button onclick="" ; class="js-button">Click</button>
     <script>
+      // assigning a variable to the "Click" button
       const buttonElement = document.querySelector(".js-button");
+      // you can assign an event to a variable
+      const eventListener = () => {
+        alert("click");
+      };
       // same as onclick="", the word after on is the event, e.g click
       buttonElement.addEventListener("click", () => {
         alert("click");
-        
-      }); 
+      });
+      // buttonElement.addEventListener("click", () => {
+      //   alert("click2");
+
+      // });
+      buttonElement.removeEventListener("click", eventListener);
     </script>
   </body>
 </html>
