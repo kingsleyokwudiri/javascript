@@ -47,11 +47,31 @@ function pressNumber(num) {
   if (currentInput === "0" && num === 0) {
     return;
   }
+  // If current input is "0" and we press a non-zero number, replace it
   if (currentInput === "0" && num !== ".") {
     currentInput = num.toString();
   } else {
     currentInput += num.toString();
   }
+  updateDisplay(currentInput);
+}
+
+// NEW: Decimal support
+function pressDecimal() {
+  // If current input is empty, start with "0."
+  if (currentInput === "") {
+    currentInput = "0.";
+    updateDisplay(currentInput);
+    return;
+  }
+
+  // If current input already has a decimal, ignore
+  if (currentInput.includes(".")) {
+    return;
+  }
+
+  // Add decimal point
+  currentInput += ".";
   updateDisplay(currentInput);
 }
 
@@ -72,8 +92,17 @@ function pressEquals() {
     alert("Please enter a number");
     return;
   }
+
   let secondNumber = parseFloat(currentInput);
+
+  // Check if secondNumber is NaN (invalid number)
+  if (isNaN(secondNumber)) {
+    alert("Invalid number");
+    return;
+  }
+
   let result = 0;
+
   if (activeAction === "+") {
     result = firstNumber + secondNumber;
   } else if (activeAction === "-") {
@@ -91,6 +120,10 @@ function pressEquals() {
     alert("Please select an action first.");
     return;
   }
+
+  // Round to avoid floating point issues
+  result = Math.round(result * 1000000) / 1000000;
+
   currentInput = result.toString();
   savedResult = result;
   localStorage.setItem("result", JSON.stringify(result));

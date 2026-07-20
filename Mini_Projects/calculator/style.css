@@ -8,66 +8,47 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
   min-height: 100vh;
   padding: 1.5rem;
   flex-direction: column;
-  background: #f0f0f0;
+  background: #f5f5f5;
   font-family: Arial, sans-serif;
 }
 
 .heading {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  margin: 0 0 1.8rem 0;
-  width: 100%;
+  margin-bottom: 1.8rem;
   color: #333;
   font-size: 2rem;
   font-weight: 300;
-  letter-spacing: 2px;
 }
 
 .calculator-container {
   max-width: 400px;
   width: 100%;
-  background: #fff;
+  background: white;
   padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* Display block */
+/* Display */
 .display {
-  background: #000000;
-  color: #fff;
+  background: #222;
+  color: white;
   padding: 20px 24px;
-  border-radius: 8px;
+  border-radius: 6px;
   margin-bottom: 20px;
   min-height: 80px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: flex-end;
-  font-size: 32px;
-  font-weight: 300;
+  font-size: 2rem;
   font-family: "Courier New", monospace;
-  word-break: break-all;
   text-align: right;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+  word-break: break-all;
 }
 
-.display .expression {
-  font-size: 16px;
-  color: #888;
-  margin-right: 12px;
-  font-weight: 400;
-}
-
-.display .result {
-  color: #fff;
-  font-size: 36px;
-}
-
+/* Button Grid */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -76,84 +57,75 @@ body {
 
 .buttons button {
   padding: 20px;
-  font-size: 20px;
-  cursor: pointer;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 8px;
-  background: #f8f9fa;
+  border-radius: 6px;
+  background: #f0f0f0;
   color: #333;
-  transition: all 0.15s ease;
-  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
   min-height: 60px;
 }
 
 .buttons button:hover {
-  background: #e9ecef;
-  transform: scale(1.02);
+  background: #e0e0e0;
 }
 
 .buttons button:active {
   transform: scale(0.95);
-  background: #dee2e6;
-}
-
-/* Number buttons */
-.buttons
-  button:not(.operator):not(.equals):not(.reset):not(.show-result) {
-  background: #f8f9fa;
 }
 
 /* Operator buttons */
 .operator {
-  background: #e3f2fd !important;
-  color: #0d6efd !important;
-  font-weight: 700 !important;
+  background: #e8f0fe;
+  color: #1a73e8;
+  font-weight: bold;
 }
 
 .operator:hover {
-  background: #bbdefb !important;
+  background: #d2e3fc;
 }
 
 /* Equals button */
 .equals {
-  background: #0d6efd !important;
-  color: white !important;
-  font-weight: 700 !important;
-  font-size: 24px !important;
+  background: #1a73e8;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .equals:hover {
-  background: #0b5ed7 !important;
+  background: #1557b0;
 }
 
 /* Reset button */
 .reset {
-  background: #dc3545 !important;
-  color: white !important;
-  font-weight: 600 !important;
+  background: #ea4335;
+  color: white;
+  font-weight: bold;
 }
 
 .reset:hover {
-  background: #bb2d3b !important;
+  background: #c62828;
 }
 
 /* Show result button */
 .show-result {
-  background: #198754 !important;
-  color: white !important;
-  font-weight: 600 !important;
+  background: #34a853;
+  color: white;
+  font-weight: bold;
 }
 
 .show-result:hover {
-  background: #157347 !important;
+  background: #2d8f47;
 }
 
-/* Zero button takes 2 columns */
+/* Zero and decimal buttons span 2 columns each */
 .zero {
-  grid-column: span 2 !important;
+  grid-column: span 2;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 420px) {
   .calculator-container {
     padding: 15px;
@@ -165,7 +137,7 @@ body {
 
   .buttons button {
     padding: 15px;
-    font-size: 18px;
+    font-size: 1rem;
     min-height: 50px;
   }
 
@@ -176,28 +148,20 @@ body {
   .display {
     padding: 16px 20px;
     min-height: 70px;
-    font-size: 28px;
-  }
-
-  .display .result {
-    font-size: 30px;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 350px) {
   .buttons button {
     padding: 12px;
-    font-size: 16px;
+    font-size: 0.9rem;
     min-height: 45px;
   }
 
   .display {
     padding: 12px 16px;
     min-height: 60px;
-    font-size: 24px;
-  }
-
-  .display .result {
-    font-size: 26px;
+    font-size: 1.2rem;
   }
 }
