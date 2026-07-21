@@ -87,4 +87,18 @@ run(function () {
 //   console.log(value);
 // });
 
-const buttonElement = document.querySelector(".js-button");
+// const buttonElement = document.querySelector(".js-button");
+
+// .filter() returns the values in an array that meet a condition
+// specified in a callback function
+console.log(
+  [1, -3, 5].filter((value, index) => {
+    // if (value >= 0) {
+    //   return true
+    // } else {
+    //   return true;
+    // }
+    // returns the values that are greater than/equal to 1
+    return value >= 0;
+  }),
+);
