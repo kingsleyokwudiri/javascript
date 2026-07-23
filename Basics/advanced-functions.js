@@ -91,6 +91,7 @@ run(function () {
 
 // .filter() returns the values in an array that meet a condition
 // specified in a callback function
+// it carries 2 parameters
 console.log(
   [1, -3, 5].filter((value, index) => {
     // if (value >= 0) {
@@ -102,3 +103,21 @@ console.log(
     return value >= 0;
   }),
 );
+
+// Calls a defined callback function on each element of an array, and returns an array that contains the results.
+console.log(
+  [1, 1, 3].map((value, index) => {
+    return value * 2;
+  }),
+);
+
+// a shorter method
+console.log([1, 1, 3].map((value) => value * 2));
+console.log([4, 6, 2].map((index) => index * 2));
+
+
+const multiply = (value1, value2) => {console.log(value1 * value2)}
+multiply(2, 3)
+
+// todoList.forEach(function (todoObject, index) {
+
