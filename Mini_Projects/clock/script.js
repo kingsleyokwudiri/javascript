@@ -6,7 +6,10 @@ let secs = document.getElementById("secs");
 setInterval(() => {
   let currentTime = new Date();
   // displays the local time on the page
-  hrs.innerHTML = currentTime.getHours();
-  mins.innerHTML = currentTime.getMinutes();
-  secs.innerHTML = currentTime.getSeconds();
+  hrs.innerHTML =
+    (currentTime.getHours() < 10 ? "0" : "") + currentTime.getHours();
+  mins.innerHTML =
+    (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+  secs.innerHTML =
+    (currentTime.getSeconds() < 10 ? "0" : "") + currentTime.getSeconds();
 }, 1000);
