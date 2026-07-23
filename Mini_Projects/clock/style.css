@@ -8,7 +8,7 @@
 .hero {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(45deg, #00027c, #8300a3);
+  background: linear-gradient(45deg, #00027c, #5b0072);
   color: #fff;
   position: relative;
 }
@@ -58,4 +58,31 @@
   right: -30px;
   bottom: -50px;
   z-index: -1;
+}
+
+.clock span {
+  font-size: 80px;
+  width: 110px;
+  display: inline-block;
+  text-align: center;
+  position: relative;
+}
+
+.clock span::after {
+  font-size: 14px;
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#hrs::after{
+  content: "HOURS";
+}
+#mins::after{
+  content: "MINUTES";
+}
+#secs::after{
+  content: "SECONDS";
+  
 }
