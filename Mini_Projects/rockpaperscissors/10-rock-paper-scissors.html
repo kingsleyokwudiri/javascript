@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="title">Rock Paper Scissors</h1>
+
+    <div class="button-row" role="group" aria-label="Game moves">
+      <button class="rock-game-button" data-move="rock" aria-label="Rock">
+        <img src="images/rock-emoji.png" alt="" aria-hidden="true" />
+      </button>
+      <button class="paper-game-button" data-move="paper" aria-label="Paper">
+        <img src="images/paper-emoji.png" alt="" aria-hidden="true" />
+      </button>
+      <button
+        class="scissors-game-button"
+        data-move="scissors"
+        aria-label="Scissors"
+      >
+        <img src="images/scissors-emoji.png" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <!-- Keyboard shortcuts message -->
+    <div class="keyboard-shortcuts">
+      <p class="shortcuts-message">
+        ⌨️ Keyboard shortcuts: Press <kbd>1</kbd> for Rock, <kbd>2</kbd> for
+        Paper, <kbd>3</kbd> for Scissors
+      </p>
+    </div>
+
+    <div class="score-board" aria-live="polite">
+      <p class="js-result"></p>
+      <p class="js-moves"></p>
+      <p class="js-score"></p>
+    </div>
+
+    <div class="control-buttons">
+      <button class="reset-btn" type="button">Reset score</button>
+      <button class="score-btn" type="button">Show Scores</button>
+      <button class="autoplay-btn" type="button">Autoplay</button>
+    </div>
+
+    <div class="autoplay-message">
+      <p class="autoPlay-message"></p>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

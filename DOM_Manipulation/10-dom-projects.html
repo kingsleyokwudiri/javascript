@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Projects</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial;
+    }
+    .js-subscribe {
+      background-color: black;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 44px;
+      margin-bottom: 20px;
+    }
+    .js-order-amount {
+      font-size: 15px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .is-subscribed {
+      background-color: rgb(240, 240, 240);
+      color: black;
+    }
+    .js-calculate-shipping {
+      color: white;
+      background-color: green;
+      border: none;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  </style>
+  <body>
+    <p>Youtube Subscribe Button</p>
+    <button onclick="subscribe()"class="js-subscribe">Subscribe</button>
+    <br></br>
+    <p>Rock Paper Scissors</p>
+    <a href="/08rockpaperscissors .html">Click here</a>
+    <br></br>
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping</p>
+    <p>Orders over $40 = FREE shipping</p>
+    <input type="number" 
+    onkeydown="calculationkeyDown(event)" class="js-order-amount" placeholder="Cost of order" />
+    <button onclick="calculateTotal()" class="js-calculate-shipping">Calculate</button>
+    <p class="js-shipping-cost"></p>
+    <script>
+      function subscribe() {
+        const buttonElement = document.querySelector('.js-subscribe');
+        if (buttonElement.innerHTML === 'Subscribe') {
+          buttonElement.innerHTML = 'Subscribed';
+          buttonElement.classList.add('is-subscribed');
+        } else {
+          buttonElement.innerHTML = 'Subscribe';
+          buttonElement.classList.remove('is-subscribed');
+        }
+      }
+
+      function calculateTotal () {
+        const inputElement = document.querySelector('.js-order-amount');
+        // Number() turns a string into a value
+        let cost = Number(inputElement.value);
+        if (cost < 40 && cost > 0) {
+          cost = cost + 10;
+          document.querySelector('.js-shipping-cost').innerHTML = `$${cost}`;
+        } else if (cost <= 0) {
+          document.querySelector('.js-shipping-cost').innerHTML = `Please enter a valid amount`;
+        } else {
+          document.querySelector('.js-shipping-cost').innerHTML = ` $${cost}\nFree shipping!`;
+        }
+      }
+        function calculationkeyDown (event) {
+          if (event.key === 'Enter') {
+          calculateTotal();
+        }
+      }
+
+
+    </script>
+  </body>
+</html>

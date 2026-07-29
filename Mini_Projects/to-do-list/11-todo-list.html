@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="page-title">To Do List</h1>
+
+    <div class="input-container">
+      <input
+        class="js-name-input"
+        placeholder="Add a new task"
+        aria-label="New task name"
+        id="taskInput"
+      />
+      <input
+        type="date"
+        class="js-date-input"
+        aria-label="Due date"
+        id="dateInput"
+      />
+      <button type="button" class="add-button">Add</button>
+      <button type="button" class="clear-button">Clear</button>
+    </div>
+
+    <div class="js-todo-list" role="list" aria-label="Task list"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

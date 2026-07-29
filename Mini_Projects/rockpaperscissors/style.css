@@ -1,0 +1,332 @@
+body {
+  align-items: center;
+  background-color: rgb(25, 25, 25);
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  justify-content: center;
+  margin: 0;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, #a8a8a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.button-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.rock-game-button,
+.paper-game-button,
+.scissors-game-button {
+  align-items: center;
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: 120px;
+  justify-content: center;
+  transition: all 0.2s ease;
+  width: 120px;
+}
+
+.rock-game-button img,
+.paper-game-button img,
+.scissors-game-button img {
+  height: 60px;
+  object-fit: contain;
+  width: 60px;
+}
+
+.rock-game-button:hover,
+.paper-game-button:hover,
+.scissors-game-button:hover {
+  background-color: rgba(250, 250, 250, 0.1);
+  transform: scale(1.05);
+}
+
+.rock-game-button:active,
+.paper-game-button:active,
+.scissors-game-button:active {
+  transform: scale(0.95);
+}
+
+/* Focus states for accessibility */
+.rock-game-button:focus-visible,
+.paper-game-button:focus-visible,
+.scissors-game-button:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 4px;
+}
+
+/* Keyboard shortcuts message styling */
+.keyboard-shortcuts {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  width: 100%;
+}
+
+.shortcuts-message {
+  color: #aaa;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.shortcuts-message kbd {
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  border: 1px solid #444;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  display: inline-block;
+  font-family: 'Inter', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 3px 10px;
+  margin: 0 3px;
+}
+
+.reset-btn:active,
+.score-btn:active,
+.autoplay-btn:active {
+  transform: scale(0.95);
+}
+
+/* Focus states for control buttons */
+.reset-btn:focus-visible,
+.score-btn:focus-visible,
+.autoplay-btn:focus-visible {
+  outline: 3px solid #4CAF50;
+  outline-offset: 2px;
+}
+
+.score-board {
+  margin-bottom: 2rem;
+  min-height: 140px;
+  text-align: center;
+}
+
+.js-result {
+  font-family: 'Inter', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.js-result:empty {
+  display: none;
+}
+
+.js-moves {
+  align-items: center;
+  display: flex;
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.move-icon {
+  height: 50px;
+  object-fit: contain;
+  width: 50px;
+}
+
+.js-score {
+  color: #ccc;
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reset-btn,
+.score-btn,
+.autoplay-btn {
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  color: black;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover,
+.score-btn:hover,
+.autoplay-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Autoplay message styling */
+.autoplay-message {
+  margin-top: 1rem;
+  min-height: 30px;
+  text-align: center;
+}
+
+.autoPlay-message {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .title {
+    font-size: 32px;
+  }
+
+  .rock-game-button,
+  .paper-game-button,
+  .scissors-game-button {
+    height: 90px;
+    width: 90px;
+  }
+
+  .rock-game-button img,
+  .paper-game-button img,
+  .scissors-game-button img {
+    height: 45px;
+    width: 45px;
+  }
+
+  .button-row {
+    gap: 15px;
+    margin-bottom: 1rem;
+  }
+
+  .keyboard-shortcuts {
+    margin-bottom: 1rem;
+  }
+
+  .shortcuts-message {
+    font-size: 13px;
+  }
+
+  .shortcuts-message kbd {
+    font-size: 12px;
+    padding: 2px 8px;
+  }
+
+  .js-result {
+    font-size: 26px;
+  }
+
+  .js-moves {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .move-icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .reset-btn,
+  .score-btn,
+  .autoplay-btn {
+    font-size: 14px;
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  .score-board {
+    min-height: 120px;
+  }
+}
+
+@media (max-width: 350px) {
+  .title {
+    font-size: 26px;
+  }
+
+  .rock-game-button,
+  .paper-game-button,
+  .scissors-game-button {
+    height: 70px;
+    width: 70px;
+  }
+
+  .rock-game-button img,
+  .paper-game-button img,
+  .scissors-game-button img {
+    height: 35px;
+    width: 35px;
+  }
+
+  .button-row {
+    gap: 10px;
+  }
+
+  .shortcuts-message {
+    font-size: 11px;
+  }
+
+  .shortcuts-message kbd {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+
+  .js-result {
+    font-size: 20px;
+  }
+
+  .js-moves {
+    font-size: 14px;
+  }
+
+  .move-icon {
+    height: 30px;
+    width: 30px;
+  }
+}
+
+/* Disabled state (if needed) */
+.reset-btn:disabled,
+.score-btn:disabled,
+.autoplay-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  transform: none !important;
+}
