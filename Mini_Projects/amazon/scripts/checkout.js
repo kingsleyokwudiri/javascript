@@ -4,12 +4,8 @@ import { formatCurrency } from "./utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
 import { deliveryOptions } from "../data/deliveryOptions.js";
 
-const today = dayjs();
-const deliveryDate = today.add(7, "days");
-deliveryDate.format("dddd, MMMM D");
-
 // ../ and ./ are for files that are out of the folder
-//  and in the same folder respectively
+// and in the same folder respectively
 
 // Calculate total quantity in cart
 function updateCheckoutItemCount() {
@@ -34,10 +30,38 @@ cart.forEach((cartItem) => {
       matchingProduct = product;
     }
   });
+
+  // Generate delivery options HTML for this product
+  let deliveryOptionsHTML = "";
+  deliveryOptions.forEach((deliveryOption) => {
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+
+    const priceString =
+      deliveryOption.priceCents === 0
+        ? "FREE Shipping"
+        : `$${formatCurrency(deliveryOption.priceCents)} - Shipping`;
+
+    deliveryOptionsHTML += `
+      <div class="delivery-option">
+        <input
+          type="radio"
+          class="delivery-option-input"
+          name="delivery-option-${matchingProduct.id}"
+        />
+        <div>
+          <div class="delivery-option-date">${dateString}</div>
+          <div class="delivery-option-price">${priceString}</div>
+        </div>
+      </div>
+    `;
+  });
+
   cartSummaryHTML += `
   <div class="cart-item-container 
   js-cart-item-container-${matchingProduct.id}">
-    <div class="delivery-date">Delivery date: Tuesday, June 21</div>
+    <div class="delivery-date">Delivery date: ${dayjs().add(7, "days").format("dddd, MMMM D")}</div>
 
     <div class="cart-item-details-grid">
       <img
@@ -71,71 +95,12 @@ cart.forEach((cartItem) => {
         <div class="delivery-options-title">
           Choose a delivery option:
         </div>
-        <div class="delivery-option">
-          <input
-            type="radio"
-            checked
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}"
-          />
-          <div>
-            <div class="delivery-option-date">Tuesday, June 21</div>
-            <div class="delivery-option-price">FREE Shipping</div>
-          </div>
-        </div>
-        <div class="delivery-option">
-          <input
-            type="radio"
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}"
-          />
-          <div>
-            <div class="delivery-option-date">Wednesday, June 15</div>
-            <div class="delivery-option-price">$4.99 - Shipping</div>
-          </div>
-        </div>
-        <div class="delivery-option">
-          <input
-            type="radio"
-            class="delivery-option-input"
-            name="delivery-option-${matchingProduct.id}"
-          />
-          <div>
-            <div class="delivery-option-date">Monday, June 13</div>
-            <div class="delivery-option-price">$9.99 - Shipping</div>
-          </div>
-        </div>
+        ${deliveryOptionsHTML}
       </div>
     </div>
   </div>
   `;
 });
-
-function deliveryOptionsHTML() {
-  deliveryOptions.forEach((deliveryOption) => {
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
-    const dateString = deliveryDate.format("dddd, MMMM D");
-    // ternary operator
-    // if the condition is true, the value is whatever is after "?"
-    const priceString =
-      deliveryOption.priceCents === 0
-        ? "FREE Shipping"
-        : `$${formatCurrency(deliveryOption.priceCents)} -``;
-    
-    <div class="delivery-option">
-      <input
-        type="radio"
-        class="delivery-option-input"
-        name="delivery-option-${matchingProduct.id}"
-      />
-      <div>
-        <div class="delivery-option-date">${dateString}</div>
-        <div class="delivery-option-price">$9.99 - Shipping</div>
-      </div>
-    </div>`;
-  });
-}
 
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
@@ -166,6 +131,7 @@ function handleSaveQuantity(productId) {
 
   // Get the new quantity from the input
   const quantityInput = container.querySelector(".quantity-input");
+  const quantityLabel = container.querySelector(".quantity-label");
   const newQuantity = Number(quantityInput.value);
 
   // Check if it's a valid number
@@ -179,7 +145,6 @@ function handleSaveQuantity(productId) {
 
   if (success) {
     // Update the quantity label
-    const quantityLabel = container.querySelector(".quantity-label");
     quantityLabel.textContent = newQuantity;
 
     // Remove editing mode
@@ -195,14 +160,13 @@ function handleSaveQuantity(productId) {
       alert("Quantity must be less than 1000");
     }
     // Reset the input to the current quantity
-    const currentQuantity = Number(quantityLabel.textContent);
-    quantityInput.value = currentQuantity;
+    quantityInput.value = quantityLabel.textContent;
   }
 }
 
 // Save link functionality
 document.querySelectorAll(".js-save-link").forEach((link) => {
-  link.addEventListener("click", (event) => {
+  link.addEventListener("click", () => {
     const productId = link.dataset.productId;
     handleSaveQuantity(productId);
   });
