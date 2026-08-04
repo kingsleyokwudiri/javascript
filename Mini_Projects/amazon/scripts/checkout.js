@@ -1,4 +1,9 @@
-import { cart, removeFromCart, updateQuantity } from "../data/cart.js";
+import {
+  cart,
+  removeFromCart,
+  updateQuantity,
+  updateDeliveryOption,
+} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
@@ -34,7 +39,9 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
     const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
     html += `
-    <div class="delivery-option">
+    <div class="delivery-option js-delivery-option"
+    data-product-id="${matchingProduct.id}"
+    data-delivery-option-id="${deliveryOption.id}">
       <input 
         type="radio"
         ${isChecked ? "checked" : ""}
@@ -63,12 +70,6 @@ cart.forEach((cartItem) => {
     }
   });
 
-  // Generate delivery options HTML for this product
-  const deliveryOptionsHTMLString = deliveryOptionsHTML(
-    matchingProduct,
-    cartItem,
-  );
-
   const deliveryOptionId = cartItem.deliveryOptionId;
   let deliveryOption;
   deliveryOptions.forEach((option) => {
@@ -80,6 +81,12 @@ cart.forEach((cartItem) => {
   const today = dayjs();
   const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
   const dateString = deliveryDate.format("dddd, MMMM D");
+
+  // Generate delivery options HTML for this product
+  const deliveryOptionsHTMLString = deliveryOptionsHTML(
+    matchingProduct,
+    cartItem,
+  );
 
   cartSummaryHTML += `
   <div class="cart-item-container 
@@ -142,7 +149,7 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
     // Focus the input field when entering edit mode
     const quantityInput = container.querySelector(".quantity-input");
     quantityInput.focus();
-    quantityInput.select(); // Select the text for easy editing
+    quantityInput.select();
   });
 });
 
@@ -199,7 +206,7 @@ document.querySelectorAll(".js-save-link").forEach((link) => {
 document.querySelectorAll(".quantity-input").forEach((input) => {
   input.addEventListener("keydown", (event) => {
     if (event.key === "Enter") {
-      event.preventDefault(); // Prevent form submission
+      event.preventDefault();
       const container = input.closest(".cart-item-container");
       const saveLink = container.querySelector(".js-save-link");
       const productId = saveLink.dataset.productId;
@@ -232,5 +239,12 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
     container.remove();
     // Update the item count after deletion
     updateCheckoutItemCount();
+  });
+});
+
+document.querySelectorAll(".js-delivery-option").forEach((element) => {
+  element.addEventListener("click", () => {
+    const { productId, deliveryOptionId } = element.dataset;
+    updateDeliveryOption(productId, deliveryOptionId);
   });
 });
