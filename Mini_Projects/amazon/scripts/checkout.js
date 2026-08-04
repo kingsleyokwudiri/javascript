@@ -19,6 +19,34 @@ function updateCheckoutItemCount() {
   }
 }
 
+// Function to generate delivery options HTML
+function deliveryOptionsHTML(matchingProduct) {
+  let html = "";
+  deliveryOptions.forEach((deliveryOption) => {
+    const today = dayjs();
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+    const priceString =
+      deliveryOption.priceCents === 0
+        ? "FREE Shipping"
+        : `$${formatCurrency(deliveryOption.priceCents)} - Shipping`;
+    html += `
+    <div class="delivery-option">
+      <input 
+        type="radio"
+        class="delivery-option-input"
+        name="delivery-option-${matchingProduct.id}"
+      />
+      <div>
+        <div class="delivery-option-date">${dateString}</div>
+        <div class="delivery-option-price">${priceString}</div>
+      </div>
+    </div>
+  `;
+  });
+  return html;
+}
+
 let cartSummaryHTML = "";
 
 cart.forEach((cartItem) => {
@@ -32,31 +60,7 @@ cart.forEach((cartItem) => {
   });
 
   // Generate delivery options HTML for this product
-  let deliveryOptionsHTML = "";
-  deliveryOptions.forEach((deliveryOption) => {
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
-    const dateString = deliveryDate.format("dddd, MMMM D");
-
-    const priceString =
-      deliveryOption.priceCents === 0
-        ? "FREE Shipping"
-        : `$${formatCurrency(deliveryOption.priceCents)} - Shipping`;
-
-    deliveryOptionsHTML += `
-      <div class="delivery-option">
-        <input
-          type="radio"
-          class="delivery-option-input"
-          name="delivery-option-${matchingProduct.id}"
-        />
-        <div>
-          <div class="delivery-option-date">${dateString}</div>
-          <div class="delivery-option-price">${priceString}</div>
-        </div>
-      </div>
-    `;
-  });
+  const deliveryOptionsHTMLString = deliveryOptionsHTML(matchingProduct);
 
   cartSummaryHTML += `
   <div class="cart-item-container 
@@ -95,7 +99,7 @@ cart.forEach((cartItem) => {
         <div class="delivery-options-title">
           Choose a delivery option:
         </div>
-        ${deliveryOptionsHTML}
+        ${deliveryOptionsHTMLString}
       </div>
     </div>
   </div>
