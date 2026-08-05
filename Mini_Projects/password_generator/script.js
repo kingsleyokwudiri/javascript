@@ -4,7 +4,7 @@ const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowerCase = "abcdefghijklmnopqrstuvwxyz";
 const number = "0123456789";
 const symbols = "@#$%^&*()_+~|}{[]></-=";
-const alChars = upperCase + lowerCase + number + symbols;
+const allChars = upperCase + lowerCase + number + symbols;
 
 function generatePassword() {
   let password = "";
@@ -17,3 +17,7 @@ function generatePassword() {
   }
   passwordBox.value = password;
 }
+
+document.querySelector(".password-button").addEventListener("click", () => {
+  generatePassword();
+});
