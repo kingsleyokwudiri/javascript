@@ -7,26 +7,41 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1 class="page-title">To Do List</h1>
+    <div class="app">
+      <h1 class="page-title">To Do List</h1>
 
-    <div class="input-container">
-      <input
-        class="js-name-input"
-        placeholder="Add a new task"
-        aria-label="New task name"
-        id="taskInput"
-      />
-      <input
-        type="date"
-        class="js-date-input"
-        aria-label="Due date"
-        id="dateInput"
-      />
-      <button type="button" class="add-button">Add</button>
-      <button type="button" class="clear-button">Clear</button>
+      <!-- toggle is now inside .app -->
+      <span class="toggle-wrap">
+        <span
+          class="toggle-track"
+          id="darkToggle"
+          role="button"
+          tabindex="0"
+          aria-label="Toggle dark mode"
+        >
+          <span class="toggle-knob" id="toggleKnob"></span>
+        </span>
+      </span>
+
+      <div class="input-container">
+        <input
+          class="js-name-input"
+          placeholder="Add a new task"
+          aria-label="New task name"
+          id="taskInput"
+        />
+        <input
+          type="date"
+          class="js-date-input"
+          aria-label="Due date"
+          id="dateInput"
+        />
+        <button type="button" class="add-button">Add</button>
+        <button type="button" class="clear-button">Clear</button>
+      </div>
+
+      <div class="js-todo-list" role="list" aria-label="Task list"></div>
     </div>
-
-    <div class="js-todo-list" role="list" aria-label="Task list"></div>
 
     <script src="script.js"></script>
   </body>

@@ -111,3 +111,47 @@ document
 // Load tasks from localStorage and render them
 loadTodoList();
 renderTodoList();
+
+// Dark mode toggle - JavaScript
+const toggleTrack = document.getElementById("darkToggle");
+
+function setDarkMode(enabled) {
+  if (enabled) {
+    document.body.classList.add("dark");
+    toggleTrack.classList.add("dark");
+    localStorage.setItem("todo_darkmode", JSON.stringify(true));
+  } else {
+    document.body.classList.remove("dark");
+    toggleTrack.classList.remove("dark");
+    localStorage.setItem("todo_darkmode", JSON.stringify(false));
+  }
+}
+
+function toggleDark() {
+  const isDark = document.body.classList.contains("dark");
+  setDarkMode(!isDark);
+}
+
+function loadDarkPreference() {
+  try {
+    const stored = localStorage.getItem("todo_darkmode");
+    if (stored !== null) {
+      const val = JSON.parse(stored);
+      setDarkMode(!!val);
+    } else {
+      setDarkMode(false);
+    }
+  } catch (_) {
+    setDarkMode(false);
+  }
+}
+
+toggleTrack.addEventListener("click", toggleDark);
+toggleTrack.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    toggleDark();
+  }
+});
+
+loadDarkPreference();

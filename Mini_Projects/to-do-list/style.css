@@ -9,13 +9,71 @@ body {
   padding: 20px;
   box-sizing: border-box;
   background: #f5f5f5;
+  transition: background 0.2s, color 0.2s;
+}
+
+.app {
+  background: #f5f5f5;
+  width: 420px;
+  max-width: 94%;
+  padding: 2rem 1.8rem 2.2rem;
+  padding-top: 60px;               /* space for the toggle */
+  border-radius: 2.5rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s, box-shadow 0.2s;
+  position: relative;              /* container for absolute toggle */
 }
 
 .page-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 15px;
+  margin-right: 60px;              /* prevent text from hiding under toggle */
   color: #333;
+  letter-spacing: -0.5px;
+  transition: color 0.2s;
+  text-align: center;
+}
+
+/* Toggle – positioned inside .app, top‑right */
+.toggle-wrap {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 5;                      /* above heading, but inside .app */
+  display: flex;
+  align-items: center;
+}
+
+.toggle-label {
+  /* removed – we no longer use it */
+}
+
+.toggle-track {
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  cursor: pointer;
+  transition: background 0.25s;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-knob {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.25s, background 0.2s;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+.toggle-track.dark .toggle-knob {
+  transform: translateX(20px);
+  background: #f0f0f0;
 }
 
 /* Input Container */
@@ -23,21 +81,32 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr auto auto;
   gap: 10px;
-  align-items: center;
+  align-items: stretch;
   margin-bottom: 20px;
   width: 100%;
   max-width: 500px;
 }
 
 .js-name-input,
+.js-date-input,
+.add-button,
+.clear-button,
+.delete-button {
+  height: 42px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.js-name-input,
 .js-date-input {
-  padding: 10px 8px;
+  padding: 0 8px;
   border: 2px solid #ddd;
   border-radius: 6px;
   font-size: 15px;
   transition: border-color 0.3s;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .js-name-input:focus,
@@ -51,14 +120,14 @@ body {
 .add-button,
 .clear-button,
 .delete-button {
-  padding: 10px 16px;
+  padding: 0 16px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
   font-weight: 600;
   transition: all 0.2s;
   white-space: nowrap;
+  font-size: 14px;
   min-width: 70px;
 }
 
@@ -66,16 +135,13 @@ body {
   background-color: #4CAF50;
   color: white;
 }
-
 .add-button:hover {
   background-color: #45a049;
   transform: scale(1.02);
 }
-
 .add-button:active {
   transform: scale(0.95);
 }
-
 .add-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.4);
@@ -85,16 +151,13 @@ body {
   background-color: #f44336;
   color: white;
 }
-
 .clear-button:hover {
   background-color: #d32f2f;
   transform: scale(1.02);
 }
-
 .clear-button:active {
   transform: scale(0.95);
 }
-
 .clear-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4);
@@ -103,20 +166,15 @@ body {
 .delete-button {
   background-color: #f44336;
   color: white;
-  padding: 6px 12px;
-  font-size: 13px;
-  min-width: 60px;
+  font-size: 13px;          /* slightly smaller – original size */
 }
-
 .delete-button:hover {
   background-color: #d32f2f;
   transform: scale(1.02);
 }
-
 .delete-button:active {
   transform: scale(0.95);
 }
-
 .delete-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.4);
@@ -133,7 +191,6 @@ body {
   padding: 10px 0;
 }
 
-/* Individual todo items */
 .js-todo-list > div {
   padding: 8px 0;
   word-break: break-word;
@@ -143,7 +200,6 @@ body {
   font-weight: 500;
 }
 
-/* Empty message styling - shown in JavaScript, not as :empty */
 .empty-message {
   grid-column: 1 / -1;
   text-align: center;
@@ -151,7 +207,7 @@ body {
   font-size: 18px;
   padding: 40px 0;
   width: 100%;
-  background: #f9f9f9;
+  background: #f5f5f5;
   border-radius: 8px;
 }
 
@@ -161,23 +217,29 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 8px;
   }
-
   .add-button,
   .clear-button {
-    grid-column: span 1;
-    padding: 10px;
+    padding: 0 10px;
     font-size: 13px;
     min-width: unset;
   }
-
   .js-todo-list {
     grid-template-columns: 1fr 1fr auto;
     gap: 8px;
     font-size: 14px;
   }
-
   .page-title {
     font-size: 20px;
+    margin-right: 50px;
+  }
+  .delete-button {
+    font-size: 13px;
+    min-width: unset;
+    padding: 0 10px;
+  }
+  .toggle-wrap {
+    top: 15px;
+    right: 15px;
   }
 }
 
@@ -186,40 +248,114 @@ body {
     grid-template-columns: 1fr;
     gap: 8px;
   }
-
   .add-button,
   .clear-button {
     grid-column: span 1;
   }
-
   .js-todo-list {
     grid-template-columns: 1fr;
     gap: 6px;
     text-align: center;
   }
-
   .js-todo-list > div {
     padding: 4px 0;
   }
-
   .delete-button {
     justify-self: center;
     width: 100%;
     max-width: 200px;
   }
-
   .empty-message {
     font-size: 16px;
     padding: 30px 0;
   }
-
   .page-title {
     font-size: 18px;
+    margin-right: 40px;
   }
-
   .js-name-input,
   .js-date-input {
-    padding: 8px 6px;
+    padding: 0 6px;
     font-size: 14px;
+    height: 38px;
   }
+  .add-button,
+  .clear-button,
+  .delete-button {
+    height: 38px;
+    font-size: 13px;
+    padding: 0 10px;
+  }
+  .toggle-wrap {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+/* Dark mode styles */
+body.dark {
+  background: #1a1a1a;
+}
+
+body.dark .app {
+  background: #1a1a1a;
+}
+
+body.dark .page-title {
+  color: #cccccc;
+}
+
+body.dark .toggle-track {
+  background: #444444;
+}
+
+body.dark .toggle-track.dark .toggle-knob {
+  background: #cccccc;
+}
+
+body.dark .js-name-input,
+body.dark .js-date-input {
+  background: #2a2a2a;
+  border-color: #444444;
+  color: #e0e0e0;
+}
+
+body.dark .js-name-input::placeholder {
+  color: #888;
+}
+
+body.dark .js-name-input:focus,
+body.dark .js-date-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+}
+
+body.dark .empty-message {
+  background: #1a1a1a;
+  color: #888;
+}
+
+body.dark .js-todo-list > div {
+  color: #e0e0e0;
+}
+
+body.dark .add-button {
+  background-color: #388e3c;
+}
+body.dark .add-button:hover {
+  background-color: #2e7d32;
+}
+
+body.dark .clear-button {
+  background-color: #d32f2f;
+}
+body.dark .clear-button:hover {
+  background-color: #b71c1c;
+}
+
+body.dark .delete-button {
+  background-color: #d32f2f;
+}
+body.dark .delete-button:hover {
+  background-color: #b71c1c;
 }
