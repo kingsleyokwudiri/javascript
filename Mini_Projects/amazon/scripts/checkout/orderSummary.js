@@ -141,7 +141,10 @@ export function renderOrderSummary() {
 
   // Insert the generated HTML into the page
   const orderSummaryElement = document.querySelector(".js-order-summary");
-  orderSummaryElement.innerHTML = cartSummaryHTML;
+  if (orderSummaryElement) {
+    orderSummaryElement.innerHTML = cartSummaryHTML;
+  }
+
   // Update checkout item count in the header
   updateCheckoutItemCount();
 
@@ -183,14 +186,9 @@ export function renderOrderSummary() {
     const success = updateQuantity(productId, newQuantity);
 
     if (success) {
-      // Update the quantity label
-      quantityLabel.textContent = newQuantity;
-
-      // Remove editing mode
-      container.classList.remove("is-editing-quantity");
-
-      // Update the cart quantity in the header
-      updateCheckoutItemCount();
+      // Regenerate both summaries
+      renderOrderSummary();
+      renderPaymentSummary();
     } else {
       // If validation failed, show an error
       if (newQuantity < 0) {
@@ -201,7 +199,6 @@ export function renderOrderSummary() {
       // Reset the input to the current quantity
       quantityInput.value = quantityLabel.textContent;
     }
-    renderPaymentSummary();
   }
 
   // Save link functionality - saves the new quantity
@@ -243,12 +240,8 @@ export function renderOrderSummary() {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
-      const container = document.querySelector(
-        `.js-cart-item-container-${productId}`,
-      );
-      container.remove(); // Remove the item from the DOM
-      // Update the item count after deletion
-      updateCheckoutItemCount();
+      // Regenerate everything from the updated cart
+      renderOrderSummary();
       renderPaymentSummary();
     });
   });
