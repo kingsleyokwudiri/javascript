@@ -45,9 +45,9 @@ body {
   align-items: center;
 }
 
-.toggle-label {
+/* .toggle-label {
   /* removed – we no longer use it */
-}
+/* } */
 
 .toggle-track {
   width: 44px;

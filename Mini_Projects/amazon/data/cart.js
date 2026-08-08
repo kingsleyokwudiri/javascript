@@ -15,7 +15,7 @@ if (!cart) {
   ]; // Empty cart by default
 }
 
-export function addToCart(productId, quantity = 1) {
+export function addToCart(productId, quantity) {
   let matchingItem;
 
   cart.forEach((cartItem) => {

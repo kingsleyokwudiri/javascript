@@ -12,6 +12,12 @@ import { deliveryOptions } from "../data/deliveryOptions.js";
 // ../ and ./ are for files that are out of the folder
 // and in the same folder respectively
 
+// Add this log at the very top to check imports
+console.log("Cart imported:", cart);
+console.log("Products imported:", products);
+console.log("Delivery options imported:", deliveryOptions);
+console.log("Dayjs imported:", dayjs);
+
 function renderOrderSummary() {
   // Calculate total quantity in cart
   function updateCheckoutItemCount() {
@@ -67,8 +73,13 @@ function renderOrderSummary() {
 
   let cartSummaryHTML = "";
 
+  // Log cart length
+  console.log("Cart length:", cart.length);
+
   // Loop through each item in the cart to build the order summary
   cart.forEach((cartItem) => {
+    console.log("Processing cart item:", cartItem);
+
     const productId = cartItem.productId;
 
     // Find the matching product details from the products array
@@ -79,6 +90,14 @@ function renderOrderSummary() {
       }
     });
 
+    // Log if product was found
+    if (!matchingProduct) {
+      console.error(`❌ Product NOT found for ID: ${productId}`);
+      return;
+    } else {
+      console.log(`✅ Product found: ${matchingProduct.name}`);
+    }
+
     // Find the saved delivery option for this cart item
     const deliveryOptionId = cartItem.deliveryOptionId;
     let deliveryOption;
@@ -87,6 +106,11 @@ function renderOrderSummary() {
         deliveryOption = option;
       }
     });
+
+    if (!deliveryOption) {
+      console.error(`❌ Delivery option NOT found for ID: ${deliveryOptionId}`);
+      return;
+    }
 
     // Calculate and format the delivery date
     const today = dayjs();
@@ -137,7 +161,6 @@ function renderOrderSummary() {
           <div class="delivery-options-title">
             Choose a delivery option:
           </div>
-          
           ${deliveryOptionsHTMLString}
         </div>
       </div>
@@ -145,8 +168,21 @@ function renderOrderSummary() {
     `;
   });
 
+  // Log the generated HTML length
+  console.log("Generated HTML length:", cartSummaryHTML.length);
+  console.log(
+    "Generated HTML preview:",
+    cartSummaryHTML.substring(0, 200) + "...",
+  );
+
   // Insert the generated HTML into the page
-  document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+  const orderSummaryElement = document.querySelector(".js-order-summary");
+  if (orderSummaryElement) {
+    orderSummaryElement.innerHTML = cartSummaryHTML;
+    console.log("✅ HTML inserted into .js-order-summary");
+  } else {
+    console.error("❌ Element .js-order-summary NOT found in the DOM");
+  }
 
   // Update checkout item count in the header
   updateCheckoutItemCount();
