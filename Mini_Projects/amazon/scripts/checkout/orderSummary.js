@@ -4,10 +4,14 @@ import {
   updateQuantity,
   updateDeliveryOption,
 } from "../../data/cart.js";
-import { products } from "../../data/products.js";
+import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-import { deliveryOptions } from "../../data/deliveryOptions.js";
+import {
+  deliveryOptions,
+  getDeliveryOption,
+} from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 // ../ and ./ are for files that are out of the folder
 // and in the same folder respectively
@@ -67,44 +71,17 @@ export function renderOrderSummary() {
 
   let cartSummaryHTML = "";
 
-  // Log cart length
-  console.log("Cart length:", cart.length);
-
   // Loop through each item in the cart to build the order summary
   cart.forEach((cartItem) => {
-    console.log("Processing cart item:", cartItem);
-
     const productId = cartItem.productId;
 
     // Find the matching product details from the products array
-    let matchingProduct;
-    products.forEach((product) => {
-      if (product.id === productId) {
-        matchingProduct = product;
-      }
-    });
-
-    // Log if product was found
-    if (!matchingProduct) {
-      console.error(`❌ Product NOT found for ID: ${productId}`);
-      return;
-    } else {
-      console.log(`✅ Product found: ${matchingProduct.name}`);
-    }
+    let matchingProduct = getProduct(productId);
 
     // Find the saved delivery option for this cart item
     const deliveryOptionId = cartItem.deliveryOptionId;
-    let deliveryOption;
-    deliveryOptions.forEach((option) => {
-      if (option.id === deliveryOptionId) {
-        deliveryOption = option;
-      }
-    });
 
-    if (!deliveryOption) {
-      console.error(`❌ Delivery option NOT found for ID: ${deliveryOptionId}`);
-      return;
-    }
+    const deliveryOption = getDeliveryOption(deliveryOptionId);
 
     // Calculate and format the delivery date
     const today = dayjs();
@@ -162,22 +139,9 @@ export function renderOrderSummary() {
     `;
   });
 
-  // Log the generated HTML length
-  console.log("Generated HTML length:", cartSummaryHTML.length);
-  console.log(
-    "Generated HTML preview:",
-    cartSummaryHTML.substring(0, 200) + "...",
-  );
-
   // Insert the generated HTML into the page
   const orderSummaryElement = document.querySelector(".js-order-summary");
-  if (orderSummaryElement) {
-    orderSummaryElement.innerHTML = cartSummaryHTML;
-    console.log("✅ HTML inserted into .js-order-summary");
-  } else {
-    console.error("❌ Element .js-order-summary NOT found in the DOM");
-  }
-
+  orderSummaryElement.innerHTML = cartSummaryHTML;
   // Update checkout item count in the header
   updateCheckoutItemCount();
 
@@ -294,6 +258,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary(); // Re-render to reflect the change
+      renderPaymentSummary();
     });
   });
 }
