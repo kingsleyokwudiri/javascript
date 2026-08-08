@@ -201,6 +201,7 @@ export function renderOrderSummary() {
       // Reset the input to the current quantity
       quantityInput.value = quantityLabel.textContent;
     }
+    renderPaymentSummary();
   }
 
   // Save link functionality - saves the new quantity
@@ -248,6 +249,7 @@ export function renderOrderSummary() {
       container.remove(); // Remove the item from the DOM
       // Update the item count after deletion
       updateCheckoutItemCount();
+      renderPaymentSummary();
     });
   });
 
