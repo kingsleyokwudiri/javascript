@@ -22,9 +22,9 @@ OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-'use strict';
+"use strict";
 
-(function() {
+(function () {
   const env = jasmine.getEnv();
   const urls = new jasmine.HtmlReporterV2Urls();
 
@@ -37,7 +37,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
   env.configure(urls.configFromCurrentUrl());
 
   const currentWindowOnload = window.onload;
-  window.onload = function() {
+  window.onload = function () {
     if (currentWindowOnload) {
       currentWindowOnload();
     }
