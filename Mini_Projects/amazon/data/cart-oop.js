@@ -4,7 +4,6 @@ function Cart(localStorageKey) {
 
     loadFromStorage() {
       this.cartItems = JSON.parse(localStorage.getItem(localStorageKey));
-
       if (!this.cartItems) {
         this.cartItems = [
           {
