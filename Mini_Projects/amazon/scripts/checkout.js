@@ -1,12 +1,9 @@
-import { cart } from "../data/cart.js";
+import { loadProductsFetch } from "../data/products.js";
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-import { loadProducts } from "../data/products.js";
-// import "../data/cart-class.js";
-// import "../data/backend-practice.js";
 
-loadProducts(() => {
-  // Call the function to render the order summary
+// Load products using fetch, then render
+loadProductsFetch().then(() => {
   renderOrderSummary();
   renderPaymentSummary();
 });

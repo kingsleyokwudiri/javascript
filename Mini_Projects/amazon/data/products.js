@@ -70,24 +70,51 @@ class Appliance extends Product {
 
 export let products = [];
 
-// callback
-export function loadProducts(fun) {
-  const xhr = new XMLHttpRequest();
-  xhr.addEventListener("load", () => {
-    products = JSON.parse(xhr.response).map((productDetails) => {
-      if (productDetails.type === "clothing") {
-        return new Clothing(productDetails);
-      } else if (productDetails.type === "appliance") {
-        return new Appliance(productDetails);
-      }
-      return new Product(productDetails);
+// fetch is used to make HTTP requests, and makes GET requests by default
+// fetch() uses a Promise
+export function loadProductsFetch() {
+  const promise = fetch("https://supersimplebackend.dev/products")
+    .then((response) => {
+      // Asynchronous
+      return response.json();
+    })
+    .then((productsData) => {
+      products = productsData.map((productDetails) => {
+        if (productDetails.type === "clothing") {
+          return new Clothing(productDetails);
+        } else if (productDetails.type === "appliance") {
+          return new Appliance(productDetails);
+        }
+        return new Product(productDetails);
+      });
+      // fun();
+    })
+    .catch((error) => {
+      console.log("Unexpected error. Please try again later");
     });
-    fun();
-  });
-  xhr.open("GET", "https://supersimplebackend.dev/products");
-  xhr.send();
+  return promise;
 }
-loadProducts();
+loadProductsFetch();
+
+// callback
+// export function loadProducts(fun) {
+//   const xhr = new XMLHttpRequest();
+//   xhr.addEventListener("load", () => {
+//     products = JSON.parse(xhr.response).map((productDetails) => {
+//       if (productDetails.type === "clothing") {
+//         return new Clothing(productDetails);
+//       } else if (productDetails.type === "appliance") {
+//         return new Appliance(productDetails);
+//       }
+//       return new Product(productDetails);
+//     });
+//     fun();
+//   });
+//   xhr.open("GET", "https://supersimplebackend.dev/products");
+//   xhr.send();
+// }
+
+// loadProducts();
 
 // export const products = [
 //   {
