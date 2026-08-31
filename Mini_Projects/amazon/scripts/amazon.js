@@ -1,9 +1,7 @@
 import { cart, addToCart } from "../data/cart.js";
-import { products, loadProducts } from "../data/products.js";
-// import { formatCurrency } from "./utils/money.js";
+import { products, loadProductsFetch } from "../data/products.js";
 
-loadProducts(renderProductsGrid);
-
+// ----- RENDER PRODUCTS -----
 function renderProductsGrid() {
   let productsHTML = "";
 
@@ -11,10 +9,7 @@ function renderProductsGrid() {
     productsHTML += `
       <div class="product-container">
         <div class="product-image-container">
-          <img
-            class="product-image"
-            src="${product.image}"
-          />
+          <img class="product-image" src="${product.image}" />
         </div>
 
         <div class="product-name limit-text-to-2-lines">
@@ -22,10 +17,7 @@ function renderProductsGrid() {
         </div>
 
         <div class="product-rating-container">
-          <img
-            class="product-rating-stars"
-            src="${product.getStarsUrl()}"
-          />
+          <img class="product-rating-stars" src="${product.getStarsUrl()}" />
           <div class="product-rating-count link-primary">${product.rating.count}</div>
         </div>
 
@@ -55,30 +47,31 @@ function renderProductsGrid() {
           Added
         </div>
 
-        <button class="add-to-cart-button button-primary js-add-to-cart"
-        data-product-id="${product.id}">
-        Add to Cart
+        <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
+          Add to Cart
         </button>
-      </div>`;
+      </div>
+    `;
   });
 
   document.querySelector(".js-products-grid").innerHTML = productsHTML;
+  setupAddToCartButtons();
+  updateCartQuantity();
+}
 
-  function updateCartQuantity() {
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-      cartQuantity += cartItem.quantity;
-    });
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-  }
+// ----- CART QUANTITY -----
+function updateCartQuantity() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.querySelector(".js-cart-quantity").innerHTML = totalItems;
+}
 
-  // Store timeouts for each product
-  const addedMessageTimeouts = {};
+// ----- ADD TO CART BUTTONS -----
+const addedMessageTimeouts = {};
 
+function setupAddToCartButtons() {
   document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
-
       const quantitySelector = document.querySelector(
         `.js-quantity-select[data-product-id="${productId}"]`,
       );
@@ -86,26 +79,24 @@ function renderProductsGrid() {
 
       addToCart(productId, quantity);
       updateCartQuantity();
-
-      // Show the "Added" message
-      const addedMessage = document.querySelector(
-        `.js-added-to-cart-${productId}`,
-      );
-      addedMessage.classList.add("added-to-cart-visible");
-
-      // Clear any existing timeout for this product
-      if (addedMessageTimeouts[productId]) {
-        clearTimeout(addedMessageTimeouts[productId]);
-      }
-
-      // Set a new timeout to hide the message after 2 seconds
-      addedMessageTimeouts[productId] = setTimeout(() => {
-        addedMessage.classList.remove("added-to-cart-visible");
-        delete addedMessageTimeouts[productId];
-      }, 2000);
+      showAddedMessage(productId);
     });
   });
-
-  // Update cart quantity on page load
-  updateCartQuantity();
 }
+
+function showAddedMessage(productId) {
+  const message = document.querySelector(`.js-added-to-cart-${productId}`);
+  message.classList.add("added-to-cart-visible");
+
+  if (addedMessageTimeouts[productId]) {
+    clearTimeout(addedMessageTimeouts[productId]);
+  }
+
+  addedMessageTimeouts[productId] = setTimeout(() => {
+    message.classList.remove("added-to-cart-visible");
+    delete addedMessageTimeouts[productId];
+  }, 2000);
+}
+
+// ----- INITIALIZE -----
+loadProductsFetch().then(renderProductsGrid);
