@@ -55,6 +55,7 @@ export function renderPaymentSummary() {
   `;
 
   document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
+
   document
     .querySelector(".js-place-order")
     .addEventListener("click", async () => {
@@ -70,11 +71,14 @@ export function renderPaymentSummary() {
         });
         const order = await response.json();
 
+        // Adds the fields the orders page expects
+        order.totalCents = totalCents;
+        order.orderTime = order.orderTime || Date.now();
+
         addOrder(order);
       } catch (error) {
         console.log("Unexpected error. Try again later.");
       }
-      // used to change the URL
       window.location.href = "orders.html";
     });
 }

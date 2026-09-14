@@ -12,7 +12,8 @@ function saveToStorage() {
 export function loadOrders() {
   const storedOrders = localStorage.getItem("orders");
   if (storedOrders) {
-    orders = JSON.parse(storedOrders);
+    const parsed = JSON.parse(storedOrders);
+    orders = Array.isArray(parsed) ? parsed : [];
   }
 }
 
