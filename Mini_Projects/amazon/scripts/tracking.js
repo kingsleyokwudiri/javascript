@@ -1,6 +1,5 @@
 import { getOrder } from "../data/orders.js";
 import { getProduct } from "../data/products.js";
-import { formatCurrency } from "./utils/money.js";
 
 function renderTracking() {
   const url = new URL(window.location.href);
@@ -31,13 +30,22 @@ function renderTracking() {
   }
 
   const product = getProduct(productId);
+  if (!product) {
+    document.querySelector(".order-tracking").innerHTML = `
+      <p>Product no longer available.</p>
+    `;
+    return;
+  }
+
   const currentTime = Date.now();
   const orderTime = order.orderTime;
   const deliveryTime = productData.estimatedDeliveryTime;
 
-  // Calculate progress (0-100)
+  // Calculate progress (0-100), guard against bad data
   let progress = 0;
-  if (currentTime < orderTime) {
+  if (deliveryTime <= orderTime) {
+    progress = 100;
+  } else if (currentTime < orderTime) {
     progress = 0;
   } else if (currentTime >= deliveryTime) {
     progress = 100;
@@ -70,10 +78,7 @@ function renderTracking() {
     <div class="product-info">${product.name}</div>
     <div class="product-info">Quantity: ${productData.quantity}</div>
 
-    <img
-      class="product-image"
-      src="${product.image}"
-    />
+    <img class="product-image" src="${product.image}" />
 
     <div class="progress-labels-container">
       <div class="progress-label ${status === "Preparing" ? "current-status" : ""}">Preparing</div>

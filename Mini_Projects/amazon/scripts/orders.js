@@ -1,7 +1,13 @@
-import { orders, getOrder } from "../data/orders.js";
+import { orders } from "../data/orders.js";
 import { getProduct } from "../data/products.js";
-import { addToCart } from "../data/cart.js";
+import { cart, addToCart } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
+
+function updateCartQuantity() {
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const el = document.querySelector(".js-cart-quantity");
+  if (el) el.innerHTML = totalItems;
+}
 
 function renderOrders() {
   let ordersHTML = "";
@@ -36,13 +42,12 @@ function renderOrders() {
           ${order.products
             .map((productData) => {
               const product = getProduct(productData.productId);
+              if (!product) return ""; // skip missing products
+
               const deliveryDate = new Date(productData.estimatedDeliveryTime);
               const deliveryDateString = deliveryDate.toLocaleDateString(
                 "en-US",
-                {
-                  month: "long",
-                  day: "numeric",
-                },
+                { month: "long", day: "numeric" },
               );
 
               return `
@@ -82,9 +87,11 @@ function renderOrders() {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
       addToCart(productId, 1);
+      updateCartQuantity();
       alert("Added to cart!");
     });
   });
 }
 
 renderOrders();
+updateCartQuantity();

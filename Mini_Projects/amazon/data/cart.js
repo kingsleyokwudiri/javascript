@@ -10,18 +10,19 @@ export function loadFromStorage() {
   }
 }
 
-// ----- LOAD CART FROM BACKEND -----
+// load cart from backend
 export async function loadCartFetch() {
   try {
     const response = await fetch("https://supersimplebackend.dev/cart");
     const text = await response.text();
-    console.log(text); // Log the response text
+    console.log(text);
+    return text;
   } catch (error) {
     console.log("Unexpected error. Try again later.");
   }
 }
 
-// ----- CART FUNCTIONS -----
+// cart functions
 export function addToCart(productId, quantity) {
   let matchingItem;
 
