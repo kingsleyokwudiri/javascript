@@ -1,6 +1,6 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
-// ----- PRODUCT CLASSES -----
+// product classes
 class Product {
   constructor(productDetails) {
     this.id = productDetails.id;
@@ -8,6 +8,7 @@ class Product {
     this.name = productDetails.name;
     this.rating = productDetails.rating;
     this.priceCents = productDetails.priceCents;
+    this.keywords = productDetails.keywords || [];
   }
 
   getStarsUrl() {
@@ -49,7 +50,7 @@ class Appliance extends Product {
   }
 }
 
-// ----- PRODUCT DATA -----
+// product data
 export let products = [];
 
 function createProduct(productDetails) {
@@ -58,7 +59,7 @@ function createProduct(productDetails) {
   return new Product(productDetails);
 }
 
-// ----- LOAD PRODUCTS -----
+// load products from local storage
 export function loadProductsFetch() {
   return fetch("https://supersimplebackend.dev/products")
     .then((response) => response.json())
@@ -74,6 +75,3 @@ export function loadProductsFetch() {
 export function getProduct(productId) {
   return products.find((product) => product.id === productId);
 }
-
-// // ----- INITIALIZE -----
-// loadProductsFetch();
