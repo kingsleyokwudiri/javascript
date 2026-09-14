@@ -1,11 +1,43 @@
 import { cart, addToCart } from "../data/cart.js";
 import { products, loadProductsFetch } from "../data/products.js";
 
+let searchTerm = "";
+
+// ----- GET SEARCH FROM URL -----
+function getSearchFromURL() {
+  const url = new URL(window.location.href);
+  return url.searchParams.get("search") || "";
+}
+
+// ----- FILTER PRODUCTS -----
+function filterProducts(products, searchTerm) {
+  if (!searchTerm) return products;
+
+  const lowerSearch = searchTerm.toLowerCase();
+
+  return products.filter((product) => {
+    const nameMatch = product.name.toLowerCase().includes(lowerSearch);
+    const keywordMatch = product.keywords.some((keyword) =>
+      keyword.toLowerCase().includes(lowerSearch),
+    );
+    return nameMatch || keywordMatch;
+  });
+}
+
 // ----- RENDER PRODUCTS -----
 function renderProductsGrid() {
+  searchTerm = getSearchFromURL();
+  const filteredProducts = filterProducts(products, searchTerm);
+
+  // Update search bar with current search
+  const searchBar = document.querySelector(".search-bar");
+  if (searchBar) {
+    searchBar.value = searchTerm;
+  }
+
   let productsHTML = "";
 
-  products.forEach((product) => {
+  filteredProducts.forEach((product) => {
     productsHTML += `
       <div class="product-container">
         <div class="product-image-container">
@@ -25,16 +57,7 @@ function renderProductsGrid() {
 
         <div class="product-quantity-container">
           <select class="js-quantity-select" data-product-id="${product.id}">
-            <option selected value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
+            ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `<option value="${n}">${n}</option>`).join("")}
           </select>
         </div>
 
@@ -55,8 +78,40 @@ function renderProductsGrid() {
   });
 
   document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+  if (filteredProducts.length === 0) {
+    document.querySelector(".js-products-grid").innerHTML = `
+      <p style="text-align: center; padding: 40px;">No products found for "${searchTerm}"</p>
+    `;
+  }
+
   setupAddToCartButtons();
   updateCartQuantity();
+}
+
+// ----- SEARCH BAR -----
+function setupSearch() {
+  const searchButton = document.querySelector(".search-button");
+  const searchBar = document.querySelector(".search-bar");
+
+  function performSearch() {
+    const searchValue = searchBar.value.trim();
+    const url = new URL(window.location.href);
+    if (searchValue) {
+      url.searchParams.set("search", searchValue);
+    } else {
+      url.searchParams.delete("search");
+    }
+    window.location.href = url.toString();
+  }
+
+  searchButton.addEventListener("click", performSearch);
+
+  searchBar.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      performSearch();
+    }
+  });
 }
 
 // ----- CART QUANTITY -----
@@ -99,4 +154,7 @@ function showAddedMessage(productId) {
 }
 
 // ----- INITIALIZE -----
-loadProductsFetch().then(renderProductsGrid);
+loadProductsFetch().then(() => {
+  renderProductsGrid();
+  setupSearch();
+});

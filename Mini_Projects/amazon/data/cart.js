@@ -6,10 +6,22 @@ export function loadFromStorage() {
   cart = JSON.parse(localStorage.getItem("cart"));
 
   if (!cart) {
-    cart = []; // Empty cart by default
+    cart = [];
   }
 }
 
+// ----- LOAD CART FROM BACKEND -----
+export async function loadCartFetch() {
+  try {
+    const response = await fetch("https://supersimplebackend.dev/cart");
+    const text = await response.text();
+    console.log(text); // Log the response text
+  } catch (error) {
+    console.log("Unexpected error. Try again later.");
+  }
+}
+
+// ----- CART FUNCTIONS -----
 export function addToCart(productId, quantity) {
   let matchingItem;
 
@@ -43,7 +55,6 @@ export function removeFromCart(productId) {
 }
 
 export function updateQuantity(productId, newQuantity) {
-  // Validation: check if newQuantity is >= 0 and < 1000
   if (newQuantity < 0 || newQuantity >= 1000) {
     console.log("Quantity must be between 0 and 999");
     return false;
@@ -66,7 +77,6 @@ export function updateQuantity(productId, newQuantity) {
   return true;
 }
 
-// for localStorage
 function saveToStorage() {
   localStorage.setItem("cart", JSON.stringify(cart));
 }
@@ -78,6 +88,8 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
       matchingItem = cartItem;
     }
   });
-  matchingItem.deliveryOptionId = deliveryOptionId;
-  saveToStorage();
+  if (matchingItem) {
+    matchingItem.deliveryOptionId = deliveryOptionId;
+    saveToStorage();
+  }
 }
