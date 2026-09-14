@@ -1,5 +1,5 @@
 import { getOrder } from "../data/orders.js";
-import { getProduct } from "../data/products.js";
+import { getProduct, loadProductsFetch } from "../data/products.js";
 
 function renderTracking() {
   const url = new URL(window.location.href);
@@ -94,4 +94,4 @@ function renderTracking() {
   document.querySelector(".order-tracking").innerHTML = trackingHTML;
 }
 
-renderTracking();
+loadProductsFetch().then(renderTracking);

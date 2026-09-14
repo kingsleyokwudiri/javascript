@@ -1,5 +1,5 @@
 import { orders } from "../data/orders.js";
-import { getProduct } from "../data/products.js";
+import { products, getProduct, loadProductsFetch } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -29,7 +29,7 @@ function renderOrders() {
             </div>
             <div class="order-total">
               <div class="order-header-label">Total:</div>
-              <div>$${formatCurrency(order.totalCents)}</div>
+              <div>$${formatCurrency(order.totalCents || 0)}</div>
             </div>
           </div>
           <div class="order-header-right-section">
@@ -42,7 +42,7 @@ function renderOrders() {
           ${order.products
             .map((productData) => {
               const product = getProduct(productData.productId);
-              if (!product) return ""; // skip missing products
+              if (!product) return "";
 
               const deliveryDate = new Date(productData.estimatedDeliveryTime);
               const deliveryDateString = deliveryDate.toLocaleDateString(
@@ -82,7 +82,6 @@ function renderOrders() {
 
   document.querySelector(".orders-grid").innerHTML = ordersHTML;
 
-  // Buy it again buttons
   document.querySelectorAll(".js-buy-again").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
@@ -93,5 +92,8 @@ function renderOrders() {
   });
 }
 
-renderOrders();
-updateCartQuantity();
+// ✅ Load products first, THEN render orders
+loadProductsFetch().then(() => {
+  renderOrders();
+  updateCartQuantity();
+});
