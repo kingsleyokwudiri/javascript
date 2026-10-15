@@ -19,6 +19,17 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 // and in the same folder respectively
 
 export function renderOrderSummary() {
+  if (cart.length === 0) {
+    orderSummaryElement.innerHTML = `
+      <p style="padding: 20px; text-align: center;">
+        Your cart is empty.
+        <a href="amazon.html" class="link-primary">Continue shopping →</a>
+      </p>
+    `;
+    updateCheckoutItemCount();
+    return;
+  }
+
   // Calculate total quantity in cart
   function updateCheckoutItemCount() {
     let totalItems = 0;

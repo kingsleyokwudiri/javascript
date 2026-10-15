@@ -1,5 +1,5 @@
 import { orders } from "../data/orders.js";
-import { products, getProduct, loadProductsFetch } from "../data/products.js";
+import { getProduct, loadProductsFetch } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
 
@@ -50,6 +50,25 @@ function renderOrders() {
                 { month: "long", day: "numeric" },
               );
 
+              // Feature 5: Hide "Track package" button when delivered
+              const isDelivered =
+                Date.now() >= productData.estimatedDeliveryTime;
+
+              const actionHTML = isDelivered
+                ? `
+                  <button class="track-package-button button-secondary" disabled
+                    style="opacity: 0.5; cursor: not-allowed;">
+                    Delivered
+                  </button>
+                `
+                : `
+                  <a href="tracking.html?orderId=${order.id}&productId=${product.id}">
+                    <button class="track-package-button button-secondary">
+                      Track package
+                    </button>
+                  </a>
+                `;
+
               return `
               <div class="product-image-container">
                 <img src="${product.image}" />
@@ -66,11 +85,7 @@ function renderOrders() {
               </div>
 
               <div class="product-actions">
-                <a href="tracking.html?orderId=${order.id}&productId=${product.id}">
-                  <button class="track-package-button button-secondary">
-                    Track package
-                  </button>
-                </a>
+                ${actionHTML}
               </div>
             `;
             })
@@ -82,6 +97,7 @@ function renderOrders() {
 
   document.querySelector(".orders-grid").innerHTML = ordersHTML;
 
+  // Buy it again buttons
   document.querySelectorAll(".js-buy-again").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
@@ -92,7 +108,7 @@ function renderOrders() {
   });
 }
 
-// ✅ Load products first, THEN render orders
+// Load products first, then render
 loadProductsFetch().then(() => {
   renderOrders();
   updateCartQuantity();

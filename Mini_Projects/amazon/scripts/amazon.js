@@ -9,13 +9,13 @@ function getSearchFromURL() {
   return url.searchParams.get("search") || "";
 }
 
-// ----- FILTER PRODUCTS -----
-function filterProducts(products, searchTerm) {
-  if (!searchTerm) return products;
+// ----- FILTER PRODUCTS (18p + 18q) -----
+function filterProducts(productsList, term) {
+  if (!term) return productsList;
 
-  const lowerSearch = searchTerm.toLowerCase();
+  const lowerSearch = term.toLowerCase();
 
-  return products.filter((product) => {
+  return productsList.filter((product) => {
     const nameMatch = product.name.toLowerCase().includes(lowerSearch);
     const keywordMatch = product.keywords.some((keyword) =>
       keyword.toLowerCase().includes(lowerSearch),
@@ -27,17 +27,15 @@ function filterProducts(products, searchTerm) {
 // ----- RENDER PRODUCTS -----
 function renderProductsGrid() {
   searchTerm = getSearchFromURL();
-  const filteredProducts = filterProducts(products, searchTerm);
+  const filtered = filterProducts(products, searchTerm);
 
-  // Update search bar with current search
+  // Fill the search bar with the current search
   const searchBar = document.querySelector(".search-bar");
-  if (searchBar) {
-    searchBar.value = searchTerm;
-  }
+  if (searchBar) searchBar.value = searchTerm;
 
   let productsHTML = "";
 
-  filteredProducts.forEach((product) => {
+  filtered.forEach((product) => {
     productsHTML += `
       <div class="product-container">
         <div class="product-image-container">
@@ -57,7 +55,9 @@ function renderProductsGrid() {
 
         <div class="product-quantity-container">
           <select class="js-quantity-select" data-product-id="${product.id}">
-            ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((n) => `<option value="${n}">${n}</option>`).join("")}
+            ${[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+              .map((n) => `<option value="${n}">${n}</option>`)
+              .join("")}
           </select>
         </div>
 
@@ -70,47 +70,59 @@ function renderProductsGrid() {
           Added
         </div>
 
-        <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">
+        <button class="add-to-cart-button button-primary js-add-to-cart"
+          data-product-id="${product.id}">
           Add to Cart
         </button>
       </div>
     `;
   });
 
-  document.querySelector(".js-products-grid").innerHTML = productsHTML;
+  const grid = document.querySelector(".js-products-grid");
 
-  if (filteredProducts.length === 0) {
-    document.querySelector(".js-products-grid").innerHTML = `
-      <p style="text-align: center; padding: 40px;">No products found for "${searchTerm}"</p>
+  // Feature 1: Show search results count
+  if (searchTerm && filtered.length > 0) {
+    grid.innerHTML =
+      `
+      <p style="grid-column: 1 / -1; padding: 10px 0; color: #565959;">
+        Showing ${filtered.length} result(s) for "${searchTerm}"
+      </p>
+    ` + productsHTML;
+  } else if (filtered.length === 0) {
+    grid.innerHTML = `
+      <p style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+        No products found for "${searchTerm}"
+      </p>
     `;
+  } else {
+    grid.innerHTML = productsHTML;
   }
 
   setupAddToCartButtons();
   updateCartQuantity();
 }
 
-// ----- SEARCH BAR -----
+// ----- SEARCH BAR (18p) -----
 function setupSearch() {
   const searchButton = document.querySelector(".search-button");
   const searchBar = document.querySelector(".search-bar");
 
   function performSearch() {
-    const searchValue = searchBar.value.trim();
+    const value = searchBar.value.trim();
     const url = new URL(window.location.href);
-    if (searchValue) {
-      url.searchParams.set("search", searchValue);
+
+    if (value) {
+      url.searchParams.set("search", value);
     } else {
       url.searchParams.delete("search");
     }
+
     window.location.href = url.toString();
   }
 
   searchButton.addEventListener("click", performSearch);
-
   searchBar.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      performSearch();
-    }
+    if (event.key === "Enter") performSearch();
   });
 }
 

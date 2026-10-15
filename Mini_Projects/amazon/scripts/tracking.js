@@ -6,8 +6,14 @@ function renderTracking() {
   const orderId = url.searchParams.get("orderId");
   const productId = url.searchParams.get("productId");
 
+  const trackingEl = document.querySelector(".order-tracking");
+
+  // If URL params are missing, show a fallback
   if (!orderId || !productId) {
-    document.querySelector(".order-tracking").innerHTML = `
+    trackingEl.innerHTML = `
+      <a class="back-to-orders-link link-primary" href="orders.html">
+        View all orders
+      </a>
       <p>Invalid tracking link. Please go back to your orders.</p>
     `;
     return;
@@ -15,7 +21,10 @@ function renderTracking() {
 
   const order = getOrder(orderId);
   if (!order) {
-    document.querySelector(".order-tracking").innerHTML = `
+    trackingEl.innerHTML = `
+      <a class="back-to-orders-link link-primary" href="orders.html">
+        View all orders
+      </a>
       <p>Order not found.</p>
     `;
     return;
@@ -23,7 +32,10 @@ function renderTracking() {
 
   const productData = order.products.find((p) => p.productId === productId);
   if (!productData) {
-    document.querySelector(".order-tracking").innerHTML = `
+    trackingEl.innerHTML = `
+      <a class="back-to-orders-link link-primary" href="orders.html">
+        View all orders
+      </a>
       <p>Product not found in this order.</p>
     `;
     return;
@@ -31,7 +43,10 @@ function renderTracking() {
 
   const product = getProduct(productId);
   if (!product) {
-    document.querySelector(".order-tracking").innerHTML = `
+    trackingEl.innerHTML = `
+      <a class="back-to-orders-link link-primary" href="orders.html">
+        View all orders
+      </a>
       <p>Product no longer available.</p>
     `;
     return;
@@ -41,19 +56,19 @@ function renderTracking() {
   const orderTime = order.orderTime;
   const deliveryTime = productData.estimatedDeliveryTime;
 
-  // Calculate progress (0-100), guard against bad data
-  let progress = 0;
+  // 18o: Calculate progress (0-100) with divide-by-zero guard
+  let progress;
   if (deliveryTime <= orderTime) {
     progress = 100;
-  } else if (currentTime < orderTime) {
-    progress = 0;
   } else if (currentTime >= deliveryTime) {
     progress = 100;
+  } else if (currentTime <= orderTime) {
+    progress = 0;
   } else {
     progress = ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
   }
 
-  // Determine status based on progress
+  // 18o: Determine status based on progress
   let status = "Preparing";
   if (progress >= 50 && progress < 100) {
     status = "Shipped";
@@ -91,7 +106,8 @@ function renderTracking() {
     </div>
   `;
 
-  document.querySelector(".order-tracking").innerHTML = trackingHTML;
+  trackingEl.innerHTML = trackingHTML;
 }
 
+// Load products first, then render
 loadProductsFetch().then(renderTracking);
