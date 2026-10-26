@@ -1,7 +1,7 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 
 // product classes
-class Product {
+export class Product {
   constructor(productDetails) {
     this.id = productDetails.id;
     this.image = productDetails.image;
@@ -24,7 +24,7 @@ class Product {
   }
 }
 
-class Clothing extends Product {
+export class Clothing extends Product {
   constructor(productDetails) {
     super(productDetails);
     this.sizeChartLink = productDetails.sizeChartLink;
@@ -35,7 +35,7 @@ class Clothing extends Product {
   }
 }
 
-class Appliance extends Product {
+export class Appliance extends Product {
   constructor(productDetails) {
     super(productDetails);
     this.instructionsLink = productDetails.instructionsLink;
@@ -53,7 +53,7 @@ class Appliance extends Product {
 // product data
 export let products = [];
 
-function createProduct(productDetails) {
+export function createProduct(productDetails) {
   if (productDetails.type === "clothing") return new Clothing(productDetails);
   if (productDetails.type === "appliance") return new Appliance(productDetails);
   return new Product(productDetails);

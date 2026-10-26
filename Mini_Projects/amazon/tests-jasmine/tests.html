@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Jasmine Spec Runner v7.0.0-pre.2</title>
+    <title>Amazon Project - Jasmine Spec Runner</title>
 
     <link
       rel="shortcut icon"
@@ -12,21 +12,40 @@
     <link rel="stylesheet" href="lib/jasmine-7.0.0-pre.2/jasmine.css" />
 
     <script src="lib/jasmine-7.0.0-pre.2/jasmine.js"></script>
-    <script src="lib/jasmine-7.0.0-pre.2/boot0.js"></script>
     <script src="lib/jasmine-7.0.0-pre.2/jasmine-html.js"></script>
-    <!-- optional: include a file here that configures the Jasmine env -->
     <script src="lib/jasmine-7.0.0-pre.2/boot.js"></script>
 
-    <!-- include source files here...
-  <script src="src/Player.js"></script>
-  <script src="src/Song.js"></script>
-
-  <!-- include spec files here... -->
-    <!-- <script src="spec/SpecHelper.js"></script>
-  <script src="spec/PlayerSpec.js"></script> -->
-    <script src="utils/moneyTest.js" type="module"></script>
-    <script src="data/cartTest.js" type="module"></script>
+    <!-- orderSummary.js imports the bare "dayjs" specifier. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "dayjs": "https://unpkg.com/dayjs@1.11.23/esm/index.js"
+        }
+      }
+    </script>
   </head>
 
-  <body></body>
+  <body>
+    <!-- Browser test setup (page harness + default fetch). -->
+    <script src="helpers/browserSetup.js" type="module"></script>
+
+    <!-- Data layer specs. -->
+    <script src="data/cartTest.js" type="module"></script>
+    <script src="data/cartClassTest.js" type="module"></script>
+    <script src="data/cartOopTest.js" type="module"></script>
+    <script src="data/deliveryOptionsTest.js" type="module"></script>
+    <script src="data/ordersTest.js" type="module"></script>
+    <script src="data/productsTest.js" type="module"></script>
+
+    <!-- Page/script specs. -->
+    <script src="scripts/amazonTest.js" type="module"></script>
+    <script src="scripts/checkoutTest.js" type="module"></script>
+    <script src="scripts/checkout/orderSummaryTest.js" type="module"></script>
+    <script src="scripts/checkout/paymentSummaryTest.js" type="module"></script>
+    <script src="scripts/ordersTest.js" type="module"></script>
+    <script src="scripts/trackingTest.js" type="module"></script>
+
+    <!-- Utility specs. -->
+    <script src="utils/moneyTest.js" type="module"></script>
+  </body>
 </html>

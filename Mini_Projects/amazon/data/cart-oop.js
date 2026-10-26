@@ -1,4 +1,4 @@
-function Cart(localStorageKey) {
+export function Cart(localStorageKey) {
   const cart = {
     cartItems: undefined,
 
@@ -89,8 +89,8 @@ function Cart(localStorageKey) {
   return cart;
 }
 
-const cart = Cart("cart-oop");
-const businessCart = Cart("cart-business");
+export const cart = Cart("cart-oop");
+export const businessCart = Cart("cart-business");
 
 cart.loadFromStorage();
 

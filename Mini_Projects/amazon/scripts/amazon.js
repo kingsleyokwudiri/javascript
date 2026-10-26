@@ -4,13 +4,25 @@ import { products, loadProductsFetch } from "../data/products.js";
 let searchTerm = "";
 
 // ----- GET SEARCH FROM URL -----
-function getSearchFromURL() {
+export function getSearchFromURL() {
   const url = new URL(window.location.href);
   return url.searchParams.get("search") || "";
 }
 
+export function getSearchUrl(value) {
+  const url = new URL(window.location.href);
+
+  if (value) {
+    url.searchParams.set("search", value);
+  } else {
+    url.searchParams.delete("search");
+  }
+
+  return url.toString();
+}
+
 // ----- FILTER PRODUCTS (18p + 18q) -----
-function filterProducts(productsList, term) {
+export function filterProducts(productsList, term) {
   if (!term) return productsList;
 
   const lowerSearch = term.toLowerCase();
@@ -25,7 +37,7 @@ function filterProducts(productsList, term) {
 }
 
 // ----- RENDER PRODUCTS -----
-function renderProductsGrid() {
+export function renderProductsGrid() {
   searchTerm = getSearchFromURL();
   const filtered = filterProducts(products, searchTerm);
 
@@ -103,21 +115,13 @@ function renderProductsGrid() {
 }
 
 // ----- SEARCH BAR (18p) -----
-function setupSearch() {
+export function setupSearch() {
   const searchButton = document.querySelector(".search-button");
   const searchBar = document.querySelector(".search-bar");
 
   function performSearch() {
     const value = searchBar.value.trim();
-    const url = new URL(window.location.href);
-
-    if (value) {
-      url.searchParams.set("search", value);
-    } else {
-      url.searchParams.delete("search");
-    }
-
-    window.location.href = url.toString();
+    window.location.href = getSearchUrl(value);
   }
 
   searchButton.addEventListener("click", performSearch);
@@ -127,7 +131,7 @@ function setupSearch() {
 }
 
 // ----- CART QUANTITY -----
-function updateCartQuantity() {
+export function updateCartQuantity() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   document.querySelector(".js-cart-quantity").innerHTML = totalItems;
 }
@@ -135,7 +139,7 @@ function updateCartQuantity() {
 // ----- ADD TO CART BUTTONS -----
 const addedMessageTimeouts = {};
 
-function setupAddToCartButtons() {
+export function setupAddToCartButtons() {
   document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
       const productId = button.dataset.productId;
@@ -151,7 +155,7 @@ function setupAddToCartButtons() {
   });
 }
 
-function showAddedMessage(productId) {
+export function showAddedMessage(productId) {
   const message = document.querySelector(`.js-added-to-cart-${productId}`);
   message.classList.add("added-to-cart-visible");
 

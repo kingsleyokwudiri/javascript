@@ -1,4 +1,4 @@
-class Cart {
+export class Cart {
   // public property
   cartItems;
   // private property
@@ -93,7 +93,7 @@ class Cart {
   }
 }
 // generates a new object
-const cart = new Cart("cart-oop");
-const businessCart = new Cart("cart-business");
+export const cart = new Cart("cart-oop");
+export const businessCart = new Cart("cart-business");
 
 // console.log(businessCart instanceof Cart);

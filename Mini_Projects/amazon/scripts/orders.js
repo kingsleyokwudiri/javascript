@@ -3,13 +3,13 @@ import { getProduct, loadProductsFetch } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
 
-function updateCartQuantity() {
+export function updateCartQuantity() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const el = document.querySelector(".js-cart-quantity");
   if (el) el.innerHTML = totalItems;
 }
 
-function renderOrders() {
+export function renderOrders() {
   let ordersHTML = "";
 
   orders.forEach((order) => {

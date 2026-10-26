@@ -6,8 +6,7 @@ import {
 } from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
-import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js";
-// import dayjs from "../utils/dayjs.min.js";
+import dayjs from "dayjs";
 
 import {
   deliveryOptions,
@@ -19,6 +18,8 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 // and in the same folder respectively
 
 export function renderOrderSummary() {
+  const orderSummaryElement = document.querySelector(".js-order-summary");
+
   if (cart.length === 0) {
     orderSummaryElement.innerHTML = `
       <p style="padding: 20px; text-align: center;">
@@ -153,7 +154,6 @@ export function renderOrderSummary() {
   });
 
   // Insert the generated HTML into the page
-  const orderSummaryElement = document.querySelector(".js-order-summary");
   if (orderSummaryElement) {
     orderSummaryElement.innerHTML = cartSummaryHTML;
   }

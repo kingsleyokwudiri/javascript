@@ -1,3 +1,6 @@
 .git-backup/
 .git-old-backup/
 .vscode/
+node_modules/
+coverage/
+.DS_Store

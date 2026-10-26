@@ -1,0 +1,9 @@
+{
+  "spec_dir": "Mini_Projects/amazon/tests-jasmine",
+  "spec_files": ["**/*Test.js"],
+  "helpers": ["helpers/jsdom.js"],
+  "env": {
+    "stopSpecOnExpectationFailure": false,
+    "random": false
+  }
+}

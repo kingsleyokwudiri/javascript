@@ -1,0 +1,22 @@
+{
+  "name": "javascript-learning-journey",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "JavaScript learning projects with a Jasmine test suite for the Amazon clone.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "jasmine --config=Mini_Projects/amazon/tests-jasmine/jasmine.json",
+    "test:amazon": "jasmine --config=Mini_Projects/amazon/tests-jasmine/jasmine.json",
+    "serve": "npx http-server . -p 8080"
+  },
+  "dependencies": {
+    "dayjs": "^1.11.23"
+  },
+  "devDependencies": {
+    "jasmine": "^7.0.0",
+    "jsdom": "^30.1.3"
+  }
+}

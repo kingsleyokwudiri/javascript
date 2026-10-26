@@ -1,7 +1,26 @@
 import { getOrder } from "../data/orders.js";
 import { getProduct, loadProductsFetch } from "../data/products.js";
 
-function renderTracking() {
+export function calculateProgress(orderTime, deliveryTime, currentTime) {
+  if (deliveryTime <= orderTime) {
+    return 100;
+  }
+  if (currentTime >= deliveryTime) {
+    return 100;
+  }
+  if (currentTime <= orderTime) {
+    return 0;
+  }
+  return ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
+}
+
+export function getTrackingStatus(progress) {
+  if (progress >= 100) return "Delivered";
+  if (progress >= 50) return "Shipped";
+  return "Preparing";
+}
+
+export function renderTracking() {
   const url = new URL(window.location.href);
   const orderId = url.searchParams.get("orderId");
   const productId = url.searchParams.get("productId");
@@ -57,24 +76,10 @@ function renderTracking() {
   const deliveryTime = productData.estimatedDeliveryTime;
 
   // 18o: Calculate progress (0-100) with divide-by-zero guard
-  let progress;
-  if (deliveryTime <= orderTime) {
-    progress = 100;
-  } else if (currentTime >= deliveryTime) {
-    progress = 100;
-  } else if (currentTime <= orderTime) {
-    progress = 0;
-  } else {
-    progress = ((currentTime - orderTime) / (deliveryTime - orderTime)) * 100;
-  }
+  const progress = calculateProgress(orderTime, deliveryTime, currentTime);
 
   // 18o: Determine status based on progress
-  let status = "Preparing";
-  if (progress >= 50 && progress < 100) {
-    status = "Shipped";
-  } else if (progress >= 100) {
-    status = "Delivered";
-  }
+  const status = getTrackingStatus(progress);
 
   const deliveryDate = new Date(deliveryTime);
   const deliveryDateString = deliveryDate.toLocaleDateString("en-US", {
