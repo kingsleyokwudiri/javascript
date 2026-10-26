@@ -66,7 +66,7 @@ export function loadProductsFetch() {
     .then((productsData) => {
       products = productsData.map(createProduct);
     })
-    .catch((error) => {
+    .catch(() => {
       console.log("Unexpected error. Please try again later");
     });
 }

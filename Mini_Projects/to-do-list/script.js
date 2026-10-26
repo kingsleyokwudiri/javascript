@@ -141,7 +141,7 @@ function loadDarkPreference() {
     } else {
       setDarkMode(false);
     }
-  } catch (_) {
+  } catch {
     setDarkMode(false);
   }
 }

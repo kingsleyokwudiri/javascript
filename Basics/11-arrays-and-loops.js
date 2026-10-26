@@ -42,6 +42,7 @@ console.log(array2);
 // ]
 // destructuring assignment
 const [firstValue, secondValue] = [1, 2, 3];
+console.log(firstValue, secondValue);
 
 for (let i = 1; i < 11; i++) {
   // skips the number 3
@@ -130,7 +131,6 @@ function removeEgg(foods) {
 console.log(removeEgg("egg"));
 
 function fizzBuzz() {
-  const newWord = ["Fizz", "Buzz", "FizzBuzz"];
   const result = [];
   for (let i = 1; i <= 20; i++) {
     if (i % 3 === 0 && i % 5 === 0) {

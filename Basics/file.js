@@ -48,32 +48,19 @@ convertTemperature(86, 'F');
 
 function convertLength(length, from, to) {
   if (from === 'miles') {
-    const convertedLength = Math.round(length * 1.6);
-    console.log(`The new length is ${convertedLength}km.`)
-  } else if (from === 'kilometer') {
-    const convertedLength = Math.round(length / 1.6);
-    console.log(`The new length is ${convertedLength} miles.`)
-  } else if (from === 'km') {
-    const convertedLength = Math.round(length / 1.6);
-    console.log(`The new length is ${convertedLength} miles.`)
-  } else if (from === 'miles' && to === 'kilometer') {
-    const convertedLength = Math.round(length * 1.6);
-    console.log(`The new length is ${convertedLength}km.`)
-  } else if (from === 'miles' && to === 'km') {
-    const convertedLength = Math.round(length * 1.6);
-    console.log(`The new length is ${convertedLength}km.`)
-  } else if (from === 'km' && to === 'miles') {
-    const convertedLength = Math.round(length / 1.6);
-    console.log(`The new length is ${convertedLength} miles.`)
-  } else if (from === 'kilometer' && to === 'miles') {
-    const convertedLength = Math.round(length / 1.6);
-    console.log(`The new length is ${convertedLength} miles.`)
-  } else if (from === 'miles' && to === 'miles') {
-    console.log(`The length is ${length} miles.`)
-  } else if (from === 'km' && to === 'km') {
-    console.log(`The length is ${length}km. .`)
-  } else if (from === 'kilometer' && to === 'kilometer') {
-    console.log(`The length is ${length}km. .`)
+    if (to === 'miles') {
+      console.log(`The length is ${length} miles.`)
+    } else {
+      const convertedLength = Math.round(length * 1.6);
+      console.log(`The new length is ${convertedLength}km.`)
+    }
+  } else if (from === 'kilometer' || from === 'km') {
+    if (to === 'kilometer' || to === 'km') {
+      console.log(`The length is ${length}km.`)
+    } else {
+      const convertedLength = Math.round(length / 1.6);
+      console.log(`The new length is ${convertedLength} miles.`)
+    }
   } else {
     console.log('Invalid unit.')
   }

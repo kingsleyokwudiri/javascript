@@ -17,7 +17,7 @@ export async function loadCartFetch() {
     const text = await response.text();
     console.log(text);
     return text;
-  } catch (error) {
+  } catch {
     console.log("Unexpected error. Try again later.");
   }
 }

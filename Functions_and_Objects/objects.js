@@ -61,7 +61,7 @@ console.log(damage)
 const object5 = {
   // message: message,
   message,
-  method: function function1() {
+  methodExpression: function function1() {
   console.log('method');
   },
   method() {

@@ -55,6 +55,8 @@ function delay(ms, value) {
   });
 }
 
+// Kept for manual testing; not called by the page.
+// eslint-disable-next-line no-unused-vars
 async function main() {
   try {
     const start = await delay(300, 2);

@@ -74,7 +74,7 @@ export function renderPaymentSummary() {
         order.orderTime = order.orderTime || Date.now();
 
         addOrder(order);
-      } catch (error) {
+      } catch {
         console.log("Unexpected error. Try again later.");
       }
       window.location.href = "orders.html";

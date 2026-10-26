@@ -93,7 +93,7 @@ run(function () {
 // specified in a callback function
 // it carries 2 parameters
 console.log(
-  [1, -3, 5].filter((value, index) => {
+  [1, -3, 5].filter((value) => {
     // if (value >= 0) {
     //   return true
     // } else {
@@ -106,7 +106,7 @@ console.log(
 
 // Calls a defined callback function on each element of an array, and returns an array that contains the results.
 console.log(
-  [1, 1, 3].map((value, index) => {
+  [1, 1, 3].map((value) => {
     return value * 2;
   }),
 );

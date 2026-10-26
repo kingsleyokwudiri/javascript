@@ -5,10 +5,8 @@ let score = JSON.parse(localStorage.getItem("score")) || {
   losses: 0,
   ties: 0,
 };
-let guess;
 let choice;
 let result;
-let randomNumber = Math.random();
 function chance() {
   let randomNumber = Math.random();
   if (randomNumber < 0.5) {

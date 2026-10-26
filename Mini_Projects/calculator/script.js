@@ -127,8 +127,8 @@ function pressEquals() {
     return;
   }
 
-  let result = 0;
-  let expression = "";
+  let result;
+  let expression;
 
   if (activeAction === "+") {
     result = firstNumber + secondNumber;

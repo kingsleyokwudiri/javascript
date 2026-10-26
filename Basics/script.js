@@ -34,5 +34,4 @@ console.log(message);
 const currency = undefined || 'USD';
 console.log(currency)
 
-let age = 4;
 

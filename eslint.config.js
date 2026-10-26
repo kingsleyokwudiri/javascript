@@ -32,6 +32,16 @@ export default [
     },
   },
   {
+    // Learning scratchpad: intentionally demonstrates constant expressions and
+    // unassigned variables, which the default rules flag as errors.
+    files: ["Basics/script.js"],
+    rules: {
+      "no-constant-binary-expression": "off",
+      "no-constant-condition": "off",
+      "no-unassigned-vars": "off",
+    },
+  },
+  {
     // Jasmine specs run with Jasmine's globals (describe, it, expect, ...).
     files: ["Mini_Projects/amazon/tests-jasmine/**/*.js"],
     languageOptions: {

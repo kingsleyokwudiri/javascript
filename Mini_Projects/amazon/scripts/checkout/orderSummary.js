@@ -4,7 +4,7 @@ import {
   updateQuantity,
   updateDeliveryOption,
 } from "../../data/cart.js";
-import { products, getProduct } from "../../data/products.js";
+import { getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "dayjs";
 
@@ -238,8 +238,6 @@ export function renderOrderSummary() {
     input.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         const container = input.closest(".cart-item-container");
-        const productId =
-          container.querySelector(".js-save-link").dataset.productId;
         const quantityLabel = container.querySelector(".quantity-label");
         // Reset input to current quantity and exit edit mode
         input.value = quantityLabel.textContent;

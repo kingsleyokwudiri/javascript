@@ -2,12 +2,11 @@ const nums = [10, 20, 30];
 nums[2] = 99;
 console.log(nums);
 function getLastValue(array) {
-  lastindex = array[array.length - 1];
+  const lastindex = array[array.length - 1];
   console.log(lastindex);
 }
 getLastValue([4, 6, 9, 3]);
 function arraySwap(array) {
-  lastindex = array[array.length - 1];
   let firstItem = array[0];
   array[0] = array[array.length - 1];
   array[array.length - 1] = firstItem;
