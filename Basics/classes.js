@@ -45,7 +45,7 @@ userBankAccount.withdraw(5000);
 console.log(userBankAccount.balance);
 */
 
-/* class Animal {
+class Animal {
   constructor(name) {
     this.name = name;
   }
@@ -54,7 +54,7 @@ console.log(userBankAccount.balance);
   }
 }
 
- class Dog extends Animal {
+class Dog extends Animal {
   constructor(name, breed) {
     // runs Animal's constructor first
     // super(...) must be called before you use "this" in a child class constructor
@@ -71,4 +71,4 @@ const cat = new Animal("Tom");
 console.log(cat.name);
 cat.speak();
 const rex = new Dog("Rex", "Husky");
-rex.speak(); */
+rex.speak();
