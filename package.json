@@ -10,12 +10,17 @@
   "scripts": {
     "test": "jasmine --config=Mini_Projects/amazon/tests-jasmine/jasmine.json",
     "test:amazon": "jasmine --config=Mini_Projects/amazon/tests-jasmine/jasmine.json",
-    "serve": "npx http-server . -p 8080"
+    "serve": "npx http-server . -p 8080",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "dayjs": "^1.11.23"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
     "jasmine": "^7.0.0",
     "jsdom": "^30.1.3"
   }
