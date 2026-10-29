@@ -45,30 +45,59 @@ userBankAccount.withdraw(5000);
 console.log(userBankAccount.balance);
 */
 
-class Animal {
-  constructor(name) {
-    this.name = name;
+// class Animal {
+//   constructor(name) {
+//     this.name = name;
+//   }
+//   speak() {
+//     console.log(`${this.name} makes a sound`);
+//   }
+// }
+
+// class Dog extends Animal {
+//   constructor(name, breed) {
+//     // runs Animal's constructor first
+//     // super(...) must be called before you use "this" in a child class constructor
+//     super(name);
+//     this.breed = breed;
+//   }
+//   speak() {
+//     // overrides Animal's speak()
+//     console.log(`${this.name} barks`);
+//   }
+// }
+
+// const cat = new Animal("Tom");
+// console.log(cat.name);
+// cat.speak();
+// const rex = new Dog("Rex", "Husky");
+// rex.speak();
+
+// class ApiClient {
+//   constructor(baseUrl) {
+//     this.baseUrl = baseUrl;
+//   }
+//   async getJson(path) {
+//     const response = await fetch(this.baseUrl + path);
+//     if (!response.ok) throw new Error(`HTTP ${response.status}`);
+//     return response.json();
+//   }
+// }
+
+// const api = new ApiClient("https://jsonplaceholder.typicode.com");
+// api.getJson("/users/1").then((user) => console.log(user.name));
+
+class Task {
+  constructor(title, done = false) {
+    this.title = title;
+    this.done = done;
   }
-  speak() {
-    console.log(`${this.name} makes a sound`);
+  complete() {
+    this.done = true;
+  }
+  toString() {
+    return "[] Buy milk";
   }
 }
 
-class Dog extends Animal {
-  constructor(name, breed) {
-    // runs Animal's constructor first
-    // super(...) must be called before you use "this" in a child class constructor
-    super(name);
-    this.breed = breed;
-  }
-  speak() {
-    // overrides Animal's speak()
-    console.log(`${this.name} barks`);
-  }
-}
-
-const cat = new Animal("Tom");
-console.log(cat.name);
-cat.speak();
-const rex = new Dog("Rex", "Husky");
-rex.speak();
+const task = new Task("HHHHH");
