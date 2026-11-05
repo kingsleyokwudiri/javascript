@@ -1,41 +1,39 @@
-// async function delay(ms, value) {
-//   return new Promise((resolve) => {
-//     setTimeout(() => resolve(value), ms);
-//   });
-// }
-
-// async function main() {
-//   try {
-//     const start = await delay(300, 2);
-//     const multiplied = start * 5;
-//     const result = multiplied + 3;
-//     console.log(result);
-//   } catch (error) {
-//     console.error("Error:", error.message);
-//   } finally {
-//     console.log("Promise has been settled.");
-//   }
-// }
-// main();
-
-
-// fetchJson, url1 and url2 are not defined, and returning a promise that resolves to an array of two values is not very useful.
-//  Instead, we can use Promise.all() to run the two fetches in parallel
-//  and return a promise that resolves to an array of two values.
-async function getTwo() {
-  const a = await fetchJson(url1);
-  const b = await fetchJson(url2);
-  try {
-    const result = await Promise.all([a, b]);
-    return result;
-  } catch (error) {
-    console.error("Error:", error.message);
+class Counter {
+  constructor(count = 0) {
+    this.count = count;
+  }
+  increment() {
+    this.count = this.count + 1;
+    console.log(this.count);
+  }
+  reset() {
+    this.count = 0;
+    console.log(this.count);
   }
 }
-getTwo()
+const counter = new Counter(4);
+const counter2 = new Counter(4);
 
-// fetch does not trigger catch on a 404 because the fetch API considers
-// any HTTP response (including 404) to be a success.
-// you can fix this by manuakky checking the response.ok property.
+counter.increment();
+counter.reset();
+counter2.reset();
 
-// an async function returns a promise. An await function is only assigned under an asyncfunction
+// area is both a method, and an instance property
+// on the second call, the instance already has an area property, so the method is no longer accessible
+// never assign a property with the same name as a method on the same object
+
+// super must be called before you use "this" in a child class
+class Employee {
+  constructor(name) {
+    this.name = name;
+  }
+}
+class Manager extends Employee {
+  constructor(name, team) {
+    super(name);
+    this.team = team;
+  }
+}
+// console.log(t) outputs the contents of "t" itself,
+// while console.log(t.toString()) outputs the string representation of "t"
+// as defined by its toString() method.
